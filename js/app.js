@@ -226,6 +226,88 @@ class AppControllerV2 {
         }
       });
     }
+
+    const qrBtn = document.getElementById('action-qr-btn');
+    if (qrBtn) {
+      qrBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.resetInactivity();
+        this.openInviteModal();
+      });
+    }
+
+    const heroInviteBtn = document.getElementById('hero-invite-qr-btn');
+    if (heroInviteBtn) {
+      heroInviteBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.resetInactivity();
+        this.openInviteModal();
+      });
+    }
+  }
+
+  openInviteModal() {
+    const isEn = window.I18n ? window.I18n.currentLang === 'en' : false;
+    const title = isEn ? 'Remote Participation & Organizer Invitation' : 'دعوة المنظمين والمشاركة عن بُعد (QR Code)';
+    const body = `
+      <div style="text-align: center; padding: 10px 4px;">
+        <div style="margin-bottom: 12px;">
+          <img src="assets/patterns/ezzana-badge.png" alt="عزّنا بطبعنا" style="height: 52px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+        </div>
+        <h4 style="color: var(--snd-gold); font-size: 24px; font-weight: 800; margin: 0 0 6px;">
+          ${isEn ? 'Official Invitation & Remote Access' : 'بطاقة الدعوة الرسمية للمشاركة والتفاعل عن بُعد'}
+        </h4>
+        <p style="color: var(--text-cream); font-size: 16px; margin: 0 0 16px; line-height: 1.5;">
+          ${isEn 
+            ? 'Scan this QR code with any mobile device to enter the interactive platform, explore milestones, take the challenge, and obtain your certified 2026 certificate.'
+            : 'امسح الرمز بكاميرا الجوال للدخول المباشر إلى المنصة والتفاعل وحضور المعرض عن بُعد وإصدار الشهادة المعتمدة لعام 2026م.'}
+        </p>
+
+        <div style="display: inline-block; padding: 14px; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 4px solid var(--snd-gold); margin-bottom: 16px;">
+          <img src="assets/qr/platform-qr-code.png" alt="QR Code" style="width: 220px; height: 220px; display: block;">
+        </div>
+
+        <div style="background: rgba(0, 45, 30, 0.85); border: 1.5px solid rgba(198, 162, 90, 0.5); border-radius: 10px; padding: 10px 14px; margin-bottom: 20px; font-family: monospace; font-size: 15px; color: #82e038; word-break: break-all;">
+          https://aaradadi.github.io/saudi-digital-transformation-96/
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+          <button id="modal-copy-link-btn" class="dock-nav-btn primary" style="height: 50px; padding: 0 22px; font-size: 15px;">
+            📋 ${isEn ? 'Copy Platform Link' : 'نسخ الرابط المباشر'}
+          </button>
+          <a href="assets/qr/platform-qr-code.png" download="Saudi-National-Day-96-QR.png" class="dock-nav-btn" style="height: 50px; padding: 0 22px; font-size: 15px; text-decoration: none;">
+            📥 ${isEn ? 'Download QR (PNG)' : 'تحميل الرمز (PNG)'}
+          </a>
+          <a href="invite.html" target="_blank" class="dock-nav-btn" style="height: 50px; padding: 0 22px; font-size: 15px; border-color: #5aba1c; color: #82e038; text-decoration: none;">
+            🖨️ ${isEn ? 'Printable Flyer' : 'بطاقة الدعوة للطباعة'}
+          </a>
+        </div>
+      </div>
+    `;
+
+    this.openModal(title, body);
+
+    setTimeout(() => {
+      const copyBtn = document.getElementById('modal-copy-link-btn');
+      if (copyBtn) {
+        copyBtn.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          const url = 'https://aaradadi.github.io/saudi-digital-transformation-96/';
+          navigator.clipboard.writeText(url).then(() => {
+            copyBtn.textContent = isEn ? '✓ Link Copied!' : '✓ تم نسخ الرابط بنجاح!';
+            copyBtn.style.background = '#5aba1c';
+            copyBtn.style.color = '#ffffff';
+            setTimeout(() => {
+              copyBtn.textContent = isEn ? '📋 Copy Platform Link' : '📋 نسخ الرابط المباشر';
+              copyBtn.style.background = '';
+              copyBtn.style.color = '';
+            }, 3000);
+          }).catch(() => {
+            alert(url);
+          });
+        });
+      }
+    }, 100);
   }
 
   setupSourceButtons() {

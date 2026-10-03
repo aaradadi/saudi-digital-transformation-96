@@ -28,6 +28,7 @@
         </div>
       </div>
       <div class="kiosk-actions">
+        <button id="action-qr-btn" class="action-btn" title="رمز الدعوة والمشاركة عن بُعد (QR Code)" style="border-color: #5aba1c; color: #82e038;">📲</button>
         <button id="action-sound-btn" class="action-btn" title="المؤثرات الصوتية">🔊</button>
         <button id="action-home-btn" class="action-btn" title="البداية">🏠</button>
         <button id="action-fullscreen-btn" class="action-btn" title="ملء الشاشة">⛶</button>
@@ -82,10 +83,13 @@
           </div>
         </div>
 
-        <!-- زر ابدأ التجربة اللمسي -->
-        <div style="text-align: center; margin: 25px 0 15px;">
-          <button id="hero-start-btn" class="dock-nav-btn primary" data-i18n="heroStartBtn" style="height: 78px; padding: 0 58px; font-size: 26px; border-radius: var(--radius-full);">
+        <!-- زر ابدأ التجربة اللمسي وزر دعوة المشاركة عن بعد -->
+        <div style="display: flex; justify-content: center; gap: 16px; margin: 25px 0 15px; flex-wrap: wrap;">
+          <button id="hero-start-btn" class="dock-nav-btn primary" data-i18n="heroStartBtn" style="height: 78px; padding: 0 46px; font-size: 24px; border-radius: var(--radius-full);">
             ✨ ابدأ التجربة التفاعلية ➔
+          </button>
+          <button id="hero-invite-qr-btn" class="dock-nav-btn" style="height: 78px; padding: 0 34px; font-size: 20px; border-color: #5aba1c; color: #82e038; border-radius: var(--radius-full);">
+            📲 دعوة ومشاركة عن بُعد (QR)
           </button>
         </div>
 
