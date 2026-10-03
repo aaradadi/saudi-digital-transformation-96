@@ -22,6 +22,10 @@ class AppControllerV2 {
 
     this.setupViewportScale();
     window.addEventListener('resize', () => this.setupViewportScale());
+    window.addEventListener('orientationchange', () => setTimeout(() => this.setupViewportScale(), 150));
+    window.addEventListener('load', () => this.setupViewportScale());
+    setTimeout(() => this.setupViewportScale(), 100);
+    setTimeout(() => this.setupViewportScale(), 400);
 
     this.setupNavigation();
     this.setupInactivityTimer();
@@ -65,13 +69,13 @@ class AppControllerV2 {
     const viewport = document.getElementById('totem-viewport');
     if (!viewport) return;
 
-    const winW = window.innerWidth;
-    const winH = window.innerHeight;
+    const winW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth || 1080;
+    const winH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 1920;
     const targetW = 1080;
     const targetH = 1920;
 
     const scale = Math.min(winW / targetW, winH / targetH);
-    viewport.style.transform = `scale(${scale})`;
+    viewport.style.transform = `translate(-50%, -50%) scale(${scale})`;
   }
 
   setupNavigation() {
