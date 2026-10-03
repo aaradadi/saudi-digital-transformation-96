@@ -621,48 +621,101 @@
 }
 
 .contestant-form-card {
-  padding: 28px 34px;
+  padding: 24px 28px;
   border-radius: var(--radius-lg);
   background: rgba(0, 40, 27, 0.94);
   border: 2px solid var(--snd-gold);
   margin-bottom: 26px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
 }
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
   margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   text-align: inherit;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-label {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--snd-gold);
 }
 
 .kiosk-touch-input, .kiosk-touch-select {
-  height: 64px;
-  padding: 0 20px;
+  height: 58px;
+  padding: 0 16px;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.12);
   border: 2px solid rgba(198, 162, 90, 0.45);
   color: #ffffff;
-  font-size: 20px;
+  font-size: 18px;
   font-family: var(--font-body);
   outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .kiosk-touch-input:focus, .kiosk-touch-select:focus {
   border-color: var(--snd-gold);
   background: rgba(255, 255, 255, 0.18);
+}
+
+/* شريط وسجل المتدربين لتصدير الشيت للمشرفين */
+.trainees-registry-card {
+  margin: 20px 0 25px;
+  padding: 18px 24px;
+  background: rgba(4, 27, 18, 0.92);
+  border: 1.5px solid rgba(198, 162, 90, 0.4);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.registry-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 17px;
+  color: var(--text-cream);
+  font-weight: 600;
+}
+
+.registry-stats .reg-badge {
+  background: rgba(90, 186, 28, 0.25);
+  color: #82e038;
+  border: 1px solid rgba(90, 186, 28, 0.5);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.registry-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 /* لوحة المفاتيح اللمسية الافتراضية */

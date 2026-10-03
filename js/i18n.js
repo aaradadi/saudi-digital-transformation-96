@@ -83,9 +83,9 @@ const I18N_TRANSLATIONS = {
     sec5Desc: 'اختبر حصيلتك المعرفية في منجزات التحول الرقمي في المملكة وجامعة أم القرى لليوم الوطني 96.',
 
     // Section 6: Certificate
-    sec6Tag: 'القسم السادس | التكريم والشهادة',
-    sec6Title: 'شهادة المشاركة الوطنية المعتمدة',
-    sec6Desc: 'سجّل بياناتك الكريمة لإصدار شهادة اجتياز تحدي التحول الرقمي وتوثيقها وتحميلها وإرسالها لبريدك.',
+    sec6Tag: 'القسم السادس | التكريم والشهادة 2026',
+    sec6Title: 'شهادة المشاركة الوطنية المعتمدة 2026',
+    sec6Desc: 'سجّل بياناتك الكريمة لإصدار الشهادة الرسمية الموثقة بكلية الهندسة والحاسبات بالقنفذة لعام 2026م وتوثيقها برمز فريد غير متكرر.',
     formName: 'الاسم الكامل:',
     formEmail: 'البريد الإلكتروني:',
     formRole: 'الصفة / الدور:',
@@ -179,9 +179,9 @@ const I18N_TRANSLATIONS = {
     sec5Desc: 'Test your knowledge on Saudi Arabia\'s digital achievements and UQU milestones for National Day 96.',
 
     // Section 6: Certificate
-    sec6Tag: 'Section 6 | Recognition & Certificate',
-    sec6Title: 'Official Certified Participation Certificate',
-    sec6Desc: 'Enter your details to generate your certified challenge certificate, download, print, or receive it via email.',
+    sec6Tag: 'Section 6 | Recognition & Certificate 2026',
+    sec6Title: 'Official Certified Participation Certificate 2026',
+    sec6Desc: 'Enter your details to generate your certificate certified by the College of Engineering & Computing in Al-Qunfudhah for 2026 with a unique non-repeating verification code.',
     formName: 'Full Name:',
     formEmail: 'Email Address:',
     formRole: 'Role / Designation:',

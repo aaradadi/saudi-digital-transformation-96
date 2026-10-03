@@ -66,12 +66,126 @@ class QuizAndCertificateManager {
 
     this.contestant = {
       name: 'سفير التحول الرقمي',
-      email: 'visitor@saudi.gov.sa',
+      email: 'guest@saudi.gov.sa',
       role: 'زائر كريم',
-      certId: 'SND96-' + Math.floor(100000 + Math.random() * 900000)
+      certId: this.generateUniqueCertId()
     };
 
     this.init();
+  }
+
+  // توليد رمز توثيق فريد غير متكرر أبداً معتمد لكلية الهندسة والحاسبات بالقنفذة 2026
+  generateUniqueCertId() {
+    const registry = this.getTraineesRegistry();
+    const existingIds = new Set(registry.map(item => item.certId));
+
+    let counter = parseInt(localStorage.getItem('cecq_seq_counter') || '101', 10);
+    counter++;
+    localStorage.setItem('cecq_seq_counter', counter.toString());
+
+    let attempts = 0;
+    while (attempts < 1000) {
+      const timePart = Date.now().toString(36).toUpperCase();
+      let randPart = '';
+      if (window.crypto && window.crypto.getRandomValues) {
+        const arr = new Uint8Array(2);
+        window.crypto.getRandomValues(arr);
+        randPart = Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+      } else {
+        randPart = Math.floor(Math.random() * 0xFFFF).toString(16).padStart(4, '0').toUpperCase();
+      }
+      const code = `CECQ-2026-${counter}-${timePart.slice(-4)}${randPart}`;
+      if (!existingIds.has(code)) {
+        return code;
+      }
+      attempts++;
+    }
+    return `CECQ-2026-${Date.now()}`;
+  }
+
+  getTraineesRegistry() {
+    try {
+      const data = localStorage.getItem('cecq_trainees_registry_2026');
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  saveTraineeRecord(name, email, role, certId) {
+    let registry = this.getTraineesRegistry();
+    const existingIndex = registry.findIndex(t => t.email && email && t.email.toLowerCase() === email.toLowerCase());
+    const now = new Date();
+    const formattedDate = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+    if (existingIndex >= 0) {
+      registry[existingIndex].name = name;
+      registry[existingIndex].role = role;
+      registry[existingIndex].certId = certId;
+      registry[existingIndex].date = formattedDate;
+    } else {
+      registry.push({
+        id: registry.length + 1,
+        name: name,
+        email: email,
+        role: role,
+        certId: certId,
+        date: formattedDate,
+        institution: 'كلية الهندسة والحاسبات بالقنفذة',
+        year: '2026م'
+      });
+    }
+    localStorage.setItem('cecq_trainees_registry_2026', JSON.stringify(registry));
+    this.updateRegistryCountUI();
+  }
+
+  updateRegistryCountUI() {
+    const el = document.getElementById('registered-trainees-count');
+    if (el) {
+      const list = this.getTraineesRegistry();
+      el.textContent = list.length;
+    }
+  }
+
+  exportTraineesCSV() {
+    const registry = this.getTraineesRegistry();
+    if (!registry || registry.length === 0) {
+      alert('لا توجد بيانات مسجلة في كشف المتدربين حتى الآن. يرجى إدخال اسم المتدرب والبريد الإلكتروني والضغط على "إصدار وتوثيق الشهادة".');
+      return;
+    }
+
+    const headers = ['م', 'الاسم الكامل', 'البريد الإلكتروني', 'الصفة / الفئة', 'رمز التوثيق المعتمد', 'تاريخ ووقت التوثيق', 'الجهة الموثقة', 'العام'];
+    const rows = registry.map((t, idx) => [
+      idx + 1,
+      `"${(t.name || '').replace(/"/g, '""')}"`,
+      `"${(t.email || '').replace(/"/g, '""')}"`,
+      `"${(t.role || '').replace(/"/g, '""')}"`,
+      `"${(t.certId || '').replace(/"/g, '""')}"`,
+      `"${(t.date || '').replace(/"/g, '""')}"`,
+      `"كلية الهندسة والحاسبات بالقنفذة"`,
+      `"2026م"`
+    ]);
+
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `cecq_trainees_registry_2026_${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    if (window.SoundEffects) SoundEffects.play('celebrate');
+    if (window.fireConfetti) window.fireConfetti(2);
+  }
+
+  clearTraineesRegistry() {
+    if (confirm('هل أنت متأكد من رغبتك في تفريغ كشف المتدربين المسجل لعام 2026؟')) {
+      localStorage.removeItem('cecq_trainees_registry_2026');
+      this.updateRegistryCountUI();
+    }
   }
 
   init() {
@@ -91,6 +205,10 @@ class QuizAndCertificateManager {
     const emailInput = document.getElementById('contestant-email');
     const roleSelect = document.getElementById('contestant-role');
     const updateBtn = document.getElementById('update-cert-btn');
+    const exportCsvBtn = document.getElementById('export-csv-btn');
+    const clearRegistryBtn = document.getElementById('clear-registry-btn');
+
+    this.updateRegistryCountUI();
 
     if (updateBtn) {
       updateBtn.addEventListener('pointerdown', (e) => {
@@ -105,9 +223,32 @@ class QuizAndCertificateManager {
           this.contestant.role = roleSelect.value;
         }
 
+        // توليد رمز توثيق غير مكرر أبداً وتخزينه في السجل
+        this.contestant.certId = this.generateUniqueCertId();
+        this.saveTraineeRecord(
+          this.contestant.name,
+          this.contestant.email,
+          this.contestant.role,
+          this.contestant.certId
+        );
+
         this.renderCertificate();
         if (window.SoundEffects) SoundEffects.play('correct');
         if (window.fireConfetti) window.fireConfetti(2);
+      });
+    }
+
+    if (exportCsvBtn) {
+      exportCsvBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.exportTraineesCSV();
+      });
+    }
+
+    if (clearRegistryBtn) {
+      clearRegistryBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.clearTraineesRegistry();
       });
     }
 
@@ -360,24 +501,24 @@ class QuizAndCertificateManager {
     ctx.font = 'bold 48px "Noto Kufi Arabic", sans-serif';
     ctx.fillText(this.contestant.name, 600, 360);
 
-    // صفة المتسابق والنتيجة
+    // صفة المتسابق (تم حذف النتيجة المستحقة تماماً بناءً على طلب المستخدم)
     ctx.fillStyle = '#ffffff';
     ctx.font = '22px "IBM Plex Sans Arabic", sans-serif';
     ctx.fillText(
       isEn
-        ? `Designation: ${this.contestant.role} | Score Achieved: ${finalScore} / 100`
-        : `الصفة: ${this.contestant.role} | النتيجة المستحقة: ${finalScore} / 100`,
+        ? `Designation: ${this.contestant.role}`
+        : `الصفة / الفئة: ${this.contestant.role}`,
       600,
       420
     );
 
-    // نص التقدير
+    // نص التقدير لعام 2026
     ctx.fillStyle = 'rgba(244, 239, 228, 0.85)';
     ctx.font = '19px "IBM Plex Sans Arabic", sans-serif';
     ctx.fillText(
       isEn
-        ? 'In recognition of outstanding digital literacy and celebration of national milestones with Umm Al-Qura University'
-        : 'تقديراً لوعيه المتميز بالتحول الرقمي الوطني واحتفاءً بمنجزات الوطن وجامعة أم القرى لعام 2025م',
+        ? 'In recognition of digital literacy and celebration of national milestones for the year 2026'
+        : 'تقديراً لوعيه المتميز بالتحول الرقمي الوطني واحتفاءً بمنجزات الوطن لعام 2026م',
       600,
       480
     );
@@ -390,22 +531,22 @@ class QuizAndCertificateManager {
     ctx.lineTo(1050, 540);
     ctx.stroke();
 
-    // التفاصيل السفلية (التاريخ، الرقم المعتمد، الختم)
+    // التفاصيل السفلية (التاريخ، رمز التوثيق الفريد غير المتكرر، التوثيق بالكلية)
     ctx.textAlign = 'left';
     ctx.fillStyle = '#c6a25a';
     ctx.font = '16px "IBM Plex Sans Arabic", sans-serif';
     ctx.fillText(isEn ? `Verification ID: ${this.contestant.certId}` : `رمز التوثيق المعتمد: ${this.contestant.certId}`, 150, 600);
-    ctx.fillText(isEn ? 'Date: September 2026' : 'التاريخ: ربيع الأول 1448هـ / سبتمبر 2026م', 150, 630);
-    ctx.fillText(isEn ? 'Verified via DGA & UQU Platforms' : 'موثقة عبر منصات الحكومة الرقمية وجامعة أم القرى', 150, 660);
+    ctx.fillText(isEn ? 'Date: Rabi\' I 1448H / September 2026' : 'التاريخ: ربيع الأول 1448هـ / سبتمبر 2026م', 150, 630);
+    ctx.fillText(isEn ? 'Certified by College of Engineering & Computing in Al-Qunfudhah' : 'موثقة بكلية الهندسة والحاسبات بالقنفذة', 150, 660);
 
-    // الختم الرقمي الذهبي
+    // الختم الرقمي الأكاديمي المعتمد
     ctx.textAlign = 'right';
     ctx.fillStyle = '#dfc27e';
     ctx.font = 'bold 18px "Noto Kufi Arabic", sans-serif';
-    ctx.fillText(isEn ? 'Official Digital Seal' : 'الختم الرقمي المعتمد', 1050, 600);
+    ctx.fillText(isEn ? 'College of Engineering & Computing' : 'كلية الهندسة والحاسبات بالقنفذة', 1050, 600);
     ctx.fillStyle = '#5aba1c';
     ctx.font = '16px "IBM Plex Sans Arabic", sans-serif';
-    ctx.fillText(isEn ? 'VERIFIED & REGISTERED' : 'مُعتمد ومُسجل رسمياً ✓', 1050, 630);
+    ctx.fillText(isEn ? 'ACADEMICALLY VERIFIED • 2026 ✓' : 'توثيق أكاديمي معتمد • 2026م ✓', 1050, 630);
   }
 
   downloadCertificate() {
@@ -413,7 +554,7 @@ class QuizAndCertificateManager {
     if (!canvas) return;
 
     const link = document.createElement('a');
-    link.download = `Saudi-National-Day-96-Certificate-${this.contestant.name.replace(/\s+/g, '_')}.png`;
+    link.download = `CECQ-2026-Certificate-${this.contestant.name.replace(/\s+/g, '_')}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
 
@@ -430,7 +571,7 @@ class QuizAndCertificateManager {
       win.document.write(`
         <html>
           <head>
-            <title>شهادة اليوم الوطني السعودي 96</title>
+            <title>شهادة كلية الهندسة والحاسبات بالقنفذة 2026</title>
             <style>
               body { margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background: #000; }
               img { max-width: 100%; max-height: 100%; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
@@ -462,8 +603,8 @@ class QuizAndCertificateManager {
           </p>
           <div style="background: rgba(0, 58, 39, 0.7); padding: 16px; border-radius: 12px; border: 1px solid var(--snd-gold); font-size: 15px; color: var(--text-muted);">
             ${isEn
-              ? `Verification ID: <strong>${this.contestant.certId}</strong>. You can verify and view your certificate anytime.`
-              : `رمز التحقق المعتمد: <strong>${this.contestant.certId}</strong>. تم تضمين النسخة عالية الدقة ورمز الاستجابة السريع (QR Code).`}
+              ? `Verification ID: <strong>${this.contestant.certId}</strong><br>Certified by: College of Engineering & Computing in Al-Qunfudhah (2026).`
+              : `رمز التوثيق المعتمد: <strong>${this.contestant.certId}</strong><br>الجهة الموثقة: كلية الهندسة والحاسبات بالقنفذة (2026م).`}
           </div>
         </div>
       `;
