@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <path d="M60 0L120 60L60 120L0 60Z" fill="none" stroke="#5aba1c" stroke-width="1.5" stroke-opacity="0.2"/>
+  <path d="M60 20L100 60L60 100L20 60Z" fill="none" stroke="#c6a25a" stroke-width="1.5" stroke-opacity="0.25"/>
+  <path d="M60 40L80 60L60 80L40 60Z" fill="none" stroke="#006e3d" stroke-width="2" stroke-opacity="0.3"/>
+  <polygon points="60,50 70,60 60,70 50,60" fill="#c6a25a" fill-opacity="0.2"/>
+  <circle cx="60" cy="60" r="3" fill="#5aba1c" fill-opacity="0.4"/>
+  <path d="M0 0L20 20M120 0L100 20M0 120L20 100M120 120L100 100" stroke="#6565e0" stroke-width="1.2" stroke-opacity="0.2"/>
+  <path d="M0 60H15M105 60H120M60 0V15M60 105V120" stroke="#971a4d" stroke-width="1.5" stroke-opacity="0.2"/>
+</svg>

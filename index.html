@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>التحول الرقمي في المملكة العربية السعودية | اليوم الوطني 96 - عزّنا بطبعنا</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/identity-theme.css">
+  <link rel="stylesheet" href="css/totem-layout.css">
+  <link rel="stylesheet" href="css/interactive-effects.css">
+</head>
+<body>
+
+  <!-- حاوية التوتم العمودية 1080x1920 لشاشة Outdoor TV-550L -->
+  <div id="totem-viewport">
+    
+    <!-- كانفاس الكونفيتي والألعاب النارية -->
+    <canvas id="confetti-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999;"></canvas>
+
+    <!-- شريط الرأس العلوي الفاخر -->
+    <header class="kiosk-header">
+      <div class="brand-section">
+        <img src="assets/patterns/saudi-emblem.svg" alt="شعار المملكة" class="brand-emblem">
+        <div class="brand-titles">
+          <span class="brand-slogan" data-i18n="brandSlogan">عزّنا بطبعنا</span>
+          <span class="brand-sub" data-i18n="brandSub">اليوم الوطني السعودي 96 | التحول الرقمي</span>
+        </div>
+      </div>
+      <div class="kiosk-actions">
+        <button id="action-sound-btn" class="action-btn" title="المؤثرات الصوتية">🔊</button>
+        <button id="action-home-btn" class="action-btn" title="البداية">🏠</button>
+        <button id="action-fullscreen-btn" class="action-btn" title="ملء الشاشة">⛶</button>
+        <button id="action-lang-btn" class="action-btn lang-btn" title="Language Toggle">EN</button>
+      </div>
+    </header>
+
+    <!-- مسرح العرض والمحتوى التفاعلي -->
+    <main class="kiosk-stage">
+
+      <!-- ==========================================
+           القسم 0: شاشة البداية والترحيب الملكي
+           ========================================== -->
+      <section id="section-hero" class="kiosk-section active bg-tuwaiq-overlay">
+        <div class="section-header" style="margin-top: 5px;">
+          <span class="section-tag" data-i18n="heroTag">✦ رحلة وطن نحو المستقبل ✦</span>
+          <h1 class="section-title gold-text" data-i18n="heroTitle" style="font-size: 54px; margin-bottom: 8px;">
+            التحول الرقمي في المملكة
+          </h1>
+          <p class="section-desc" data-i18n="heroDesc">
+            أمجادٌ تُروى، ورؤيةٌ تتحقق، وريادةٌ رقمية ترتقي بطموح يعانق عنان السماء بمناسبة اليوم الوطني 96.
+          </p>
+        </div>
+
+        <!-- جدارية قادة الوطن الرسمية المفرغة -->
+        <div class="hero-leaders-grid">
+          <!-- المؤسس الملك عبدالعزيز -->
+          <div class="leader-portrait-card">
+            <img src="assets/leaders/King-Abdulaziz.png" alt="الملك عبدالعزيز آل سعود" class="leader-img">
+            <div class="leader-meta">
+              <div class="leader-title" data-i18n="kingAbdulazizTitle">الملك عبدالعزيز</div>
+              <div class="leader-role" data-i18n="kingAbdulazizRole">المؤسس - طيب الله ثراه</div>
+            </div>
+          </div>
+
+          <!-- خادم الحرمين الشريفين الملك سلمان -->
+          <div class="leader-portrait-card featured">
+            <img src="assets/leaders/King-Salman.png" alt="خادم الحرمين الشريفين الملك سلمان بن عبدالعزيز" class="leader-img">
+            <div class="leader-meta">
+              <div class="leader-title" data-i18n="kingSalmanTitle">خادم الحرمين الشريفين</div>
+              <div class="leader-role" data-i18n="kingSalmanRole">الملك سلمان بن عبدالعزيز آل سعود</div>
+            </div>
+          </div>
+
+          <!-- سمو ولي العهد الأمير محمد بن سلمان -->
+          <div class="leader-portrait-card">
+            <img src="assets/leaders/Crown-Prince-Mohammad-Bin-Salman.png" alt="سمو ولي العهد الأمير محمد بن سلمان" class="leader-img">
+            <div class="leader-meta">
+              <div class="leader-title" data-i18n="crownPrinceTitle">صاحب السمو الملكي</div>
+              <div class="leader-role" data-i18n="crownPrinceRole">الأمير محمد بن سلمان بن عبدالعزيز</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- زر ابدأ التجربة اللمسي -->
+        <div style="text-align: center; margin: 25px 0 15px;">
+          <button id="hero-start-btn" class="dock-nav-btn primary" data-i18n="heroStartBtn" style="height: 78px; padding: 0 58px; font-size: 26px; border-radius: var(--radius-full);">
+            ✨ ابدأ التجربة التفاعلية ➔
+          </button>
+        </div>
+
+        <!-- شريط طِباع الهوية الستة المعتمدة -->
+        <div class="traits-strip" style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+          <span class="badge-trait" style="background: rgba(90, 186, 28, 0.25); color: #5aba1c; border: 1.5px solid #5aba1c; font-size: 17px;" data-i18n="traitAuthenticity">🌿 الأصالة</span>
+          <span class="badge-trait" style="background: rgba(0, 80, 175, 0.25); color: #4da3ff; border: 1.5px solid #0050af; font-size: 17px;" data-i18n="traitDetermination">⛰️ الهمة</span>
+          <span class="badge-trait" style="background: rgba(101, 101, 224, 0.25); color: #a2a2ff; border: 1.5px solid #6565e0; font-size: 17px;" data-i18n="traitCourage">⚔️ الشجاعة</span>
+          <span class="badge-trait" style="background: rgba(151, 26, 77, 0.25); color: #ff6b9d; border: 1.5px solid #971a4d; font-size: 17px;" data-i18n="traitGenerosity">☕ الكرم</span>
+          <span class="badge-trait" style="background: rgba(96, 124, 79, 0.25); color: #8ec371; border: 1.5px solid #607c4f; font-size: 17px;" data-i18n="traitGiving">🕊️ الجود</span>
+          <span class="badge-trait" style="background: rgba(198, 162, 90, 0.25); color: #dfc27e; border: 1.5px solid #c6a25a; font-size: 17px;" data-i18n="traitVision">🌟 الرؤية والطموح</span>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           القسم 1: منجزات المملكة والحوكمة الوطنية
+           ========================================== -->
+      <section id="section-saudi" class="kiosk-section bg-sadu-overlay">
+        <div class="section-header">
+          <div style="display: flex; justify-content: center; align-items: center; gap: 14px; margin-bottom: 8px;">
+            <span class="section-tag" data-i18n="sec1Tag">القسم الأول | منجزات المملكة</span>
+            <button class="source-tag-btn open-source-modal-btn" data-source-key="sdaiaAndVision">
+              🔍 المصدر الرسمي المعتمد (DGA & SDAIA)
+            </button>
+          </div>
+          <h2 class="section-title gold-text" data-i18n="sec1Title">التحول الرقمي والحوكمة الوطنية</h2>
+          <p class="section-desc" data-i18n="sec1Desc">منظومة وطنية رائدة ترتكز على كفاءة الخدمات وسيادة البيانات وحوكمة الإجراءات الحكومية.</p>
+        </div>
+
+        <!-- الركائز الثلاث التفاعلية مع شاشات المحاكاة -->
+        <div class="pillars-grid">
+          <!-- الخدمات الرقمية -->
+          <div class="national-card pillar-card" data-showcase="services_pillar">
+            <div class="pillar-icon-box">⚡</div>
+            <h3 class="pillar-title" data-i18n="pillar1Title">الخدمات الرقمية</h3>
+            <p style="font-size: 18px; color: var(--text-cream); line-height: 1.6;" data-i18n="pillar1Desc">
+              أتمتة المعاملات الحكومية بنسبة تفوق 97% وتقديم تجربة مستفيد متكاملة عبر منصات أبشر ونفاذ وتوكلنا.
+            </p>
+            <span style="font-size: 14px; color: var(--snd-gold); margin-top: 14px; font-weight: 700;">👆 المس لعرض المحاكاة والتفاصيل ➔</span>
+          </div>
+
+          <!-- البيانات والذكاء الاصطناعي -->
+          <div class="national-card pillar-card" style="border-color: var(--trait-authenticity);" data-showcase="ai_pillar">
+            <div class="pillar-icon-box" style="border-color: var(--trait-authenticity); color: var(--trait-authenticity);">🧠</div>
+            <h3 class="pillar-title" style="color: var(--trait-authenticity);" data-i18n="pillar2Title">البيانات والذكاء الاصطناعي</h3>
+            <p style="font-size: 18px; color: var(--text-cream); line-height: 1.6;" data-i18n="pillar2Desc">
+              بناء مراكز الحوسبة السيادية وبنك البيانات الوطني تحت إشراف (سدايا) وصناعة النماذج اللغوية الذكية.
+            </p>
+            <span style="font-size: 14px; color: var(--trait-authenticity); margin-top: 14px; font-weight: 700;">👆 المس لعرض المحاكاة والتفاصيل ➔</span>
+          </div>
+
+          <!-- الحوكمة المؤسسية -->
+          <div class="national-card pillar-card" style="border-color: var(--trait-courage);" data-showcase="governance_pillar">
+            <div class="pillar-icon-box" style="border-color: var(--trait-courage); color: var(--trait-courage);">⚖️</div>
+            <h3 class="pillar-title" style="color: #a2a2ff;" data-i18n="pillar3Title">الحوكمة المؤسسية</h3>
+            <p style="font-size: 18px; color: var(--text-cream); line-height: 1.6;" data-i18n="pillar3Desc">
+              تطبيق أعلى معايير الشفافية وإدارة المخاطر والامتثال لضوابط هيئة الحكومة الرقمية (DGA).
+            </p>
+            <span style="font-size: 14px; color: #a2a2ff; margin-top: 14px; font-weight: 700;">👆 المس لعرض المحاكاة والتفاصيل ➔</span>
+          </div>
+        </div>
+
+        <!-- عجلة الحوكمة التفاعلية السداسية -->
+        <div class="wheel-section-box">
+          <div style="text-align: center; margin-bottom: 12px;">
+            <span class="badge-trait" style="background: rgba(198, 162, 90, 0.2); color: var(--snd-gold); border: 1.5px solid var(--snd-gold); font-size: 17px;" data-i18n="wheelPrompt">
+              👆 المس محاور عجلة الحوكمة لاستعراض الضوابط والمؤشرات الوطنية
+            </span>
+          </div>
+
+          <div class="wheel-container">
+            <svg id="governance-wheel-svg" viewBox="0 0 520 520" class="wheel-svg"></svg>
+            <div class="wheel-center-hub">
+              <span class="wheel-center-title">عجلة الحوكمة</span>
+              <span class="wheel-center-sub">Governance Wheel</span>
+              <span style="font-size: 26px; margin-top: 4px;">🇸🇦</span>
+            </div>
+          </div>
+
+          <div id="governance-details-panel" class="wheel-details-panel">
+            <!-- يتم التحديث تلقائياً عبر governance-wheel.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           القسم 2: خارطة الاستكشاف التفاعلية الحقيقية ومحاور رؤية 2030
+           ========================================== -->
+      <section id="section-map" class="kiosk-section bg-tuwaiq-overlay">
+        <div class="section-header">
+          <div style="display: flex; justify-content: center; align-items: center; gap: 14px; margin-bottom: 8px;">
+            <span class="section-tag" data-i18n="sec2Tag">القسم الثاني | خارطة الاستكشاف</span>
+            <button class="source-tag-btn open-source-modal-btn" data-source-key="sdaiaAndVision">
+              🔍 المصدر الرسمي المعتمد (Vision 2030)
+            </button>
+          </div>
+          <h2 class="section-title gold-text" data-i18n="sec2Title">خارطة التحول الرقمي ومحاور الرؤية 2030</h2>
+          <p class="section-desc" data-i18n="sec2Desc">استكشف جغرافية التحول الرقمي الحقيقية في المملكة وارتباط المشاريع الكبرى بمحاور رؤية السعودية 2030 الثلاثة.</p>
+        </div>
+
+        <div class="map-section-wrapper">
+          <!-- فلاتر محاور الرؤية الثلاثة المكبرة -->
+          <div class="map-filters-row">
+            <button class="map-pillar-filter active" data-pillar="all">
+              🌐 جميع المحاور والمناطق
+            </button>
+            <button class="map-pillar-filter" data-pillar="vibrant">
+              💚 <span data-i18n="pillarSociety">مجتمع حيوي</span>
+            </button>
+            <button class="map-pillar-filter" data-pillar="thriving">
+              ⚡ <span data-i18n="pillarEconomy">اقتصاد مزدهر</span>
+            </button>
+            <button class="map-pillar-filter" data-pillar="ambitious">
+              🏛️ <span data-i18n="pillarNation">وطن طموح</span>
+            </button>
+          </div>
+
+          <!-- خريطة المملكة الحقيقية المعتمدة -->
+          <div id="saudi-map-container" class="saudi-map-container">
+            <!-- يتم تشغيل الخريطة الحقيقية الدقيقة مع النقاط التفاعلية عبر map-explorer.js -->
+          </div>
+
+          <!-- بطاقة تفاصيل ومحاكاة المنطقة المختارة -->
+          <div id="map-region-info-box" class="map-info-box">
+            <!-- يتم التحديث بواسطة map-explorer.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           القسم 3: جامعة أم القرى - وثائق الإنجازات الرسمية 2025
+           ========================================== -->
+      <section id="section-uqu" class="kiosk-section bg-tuwaiq-overlay">
+        <div class="section-header">
+          <div style="display: flex; justify-content: center; align-items: center; gap: 14px; margin-bottom: 8px;">
+            <span class="section-tag" data-i18n="sec3Tag">القسم الثالث | وثائق الإنجازات الرسمية 2025</span>
+            <button class="source-tag-btn open-source-modal-btn" data-source-key="uquReports">
+              🔍 المصدر الرسمي المعتمد (تقريري 2025 الرسميين)
+            </button>
+          </div>
+          <h2 class="section-title gold-text" data-i18n="sec3Title">جامعة أم القرى: رحلة التحول الرقمي</h2>
+          <p class="section-desc" data-i18n="sec3Desc">مؤشرات أداء استثنائية ونقلة نوعية في كفاءة التعليم والخدمات الذكية من التقريرين الرسميين المعتمدين 2025.</p>
+        </div>
+
+        <!-- بطاقة مؤشر قياس التحول الرقمي لآخر 3 سنوات -->
+        <div class="dga-chart-card" data-showcase="uqu_dga" style="cursor: pointer;">
+          <div class="dga-chart-header">
+            <div>
+              <h3 style="font-family: var(--font-display); font-size: 24px; color: var(--snd-gold);" data-i18n="dgaChartTitle">
+                📈 مؤشر قياس التحول الرقمي (DGA) لآخر 3 سنوات
+              </h3>
+              <p style="font-size: 16px; color: var(--text-muted); margin-top: 4px;" data-i18n="dgaChartSub">
+                مقارنة نتائج قياس التحول الرقمي لجامعة أم القرى (تقرير 2025 - ص 245)
+              </p>
+            </div>
+            <span style="font-size: 15px; color: var(--snd-gold); font-weight: 700;">👆 المس لعرض المحاكاة والتقرير المباشر ➔</span>
+          </div>
+
+          <div class="dga-bars-container">
+            <div class="dga-bar-item">
+              <div class="dga-bar-val">75.08%</div>
+              <div class="dga-bar-fill" style="height: 145px;"></div>
+              <div class="dga-bar-year">قياس 2023</div>
+              <span class="dga-bar-change change-up">+4.39% زيادة</span>
+            </div>
+
+            <div class="dga-bar-item">
+              <div class="dga-bar-val">68.60%</div>
+              <div class="dga-bar-fill" style="height: 125px; background: linear-gradient(180deg, #c6a25a 0%, #004b2b 100%);"></div>
+              <div class="dga-bar-year">قياس 2024</div>
+              <span class="dga-bar-change change-down">-6.48% معايير جديدة</span>
+            </div>
+
+            <div class="dga-bar-item highlight">
+              <div class="dga-bar-val" style="color: #dfc27e; font-size: 26px;">70.17%</div>
+              <div class="dga-bar-fill" style="height: 168px;"></div>
+              <div class="dga-bar-year" style="color: #dfc27e;">قياس 2025</div>
+              <span class="dga-bar-change change-up">+1.57% زيادة مستمرة</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- شبكة الإحصائيات والأرقام المعتمدة 2025 التفاعلية -->
+        <div class="uqu-metrics-grid">
+          <div class="metric-stat-card" data-showcase="uqu_visits">
+            <div class="metric-number">60M+</div>
+            <div class="metric-label">زيارات المنصات الرقمية</div>
+            <div class="metric-sub">تقرير الإنجازات ص 20</div>
+          </div>
+
+          <div class="metric-stat-card" data-showcase="services_pillar">
+            <div class="metric-number">12M+</div>
+            <div class="metric-label">العمليات المنفذة</div>
+            <div class="metric-sub">سرعة وموثوقية عالية</div>
+          </div>
+
+          <div class="metric-stat-card" data-showcase="governance_pillar">
+            <div class="metric-number">95%</div>
+            <div class="metric-label">أتمتة الخدمات</div>
+            <div class="metric-sub">معاملات بلا أوراق</div>
+          </div>
+
+          <div class="metric-stat-card" data-showcase="uqu_visits">
+            <div class="metric-number">6M</div>
+            <div class="metric-label">ساعة استخدام بلاك بورد</div>
+            <div class="metric-sub">تعلم إلكتروني متكامل</div>
+          </div>
+
+          <div class="metric-stat-card" data-showcase="services_pillar">
+            <div class="metric-number">850K</div>
+            <div class="metric-label">الطلبات الإلكترونية</div>
+            <div class="metric-sub">إنجاز ذاتي فوري</div>
+          </div>
+
+          <div class="metric-stat-card" data-showcase="ai_pillar">
+            <div class="metric-number">105</div>
+            <div class="metric-label">المعامل المحدثة</div>
+            <div class="metric-sub">أحدث التجهيزات التقنية</div>
+          </div>
+
+          <div class="metric-stat-card" data-showcase="uqu_visits">
+            <div class="metric-number">+100</div>
+            <div class="metric-label">خدمة و16 منصة</div>
+            <div class="metric-sub">بيئة موحدة متكاملة</div>
+          </div>
+
+          <div class="metric-stat-card" data-showcase="services_pillar">
+            <div class="metric-number">5,500</div>
+            <div class="metric-label">تيرابايت بيانات منقولة</div>
+            <div class="metric-sub">بنية تحتية عملاقة</div>
+          </div>
+        </div>
+
+        <!-- تبويبات المسارات والذكاء الاصطناعي والمشاريع -->
+        <div class="tabs-control-row">
+          <button class="tab-btn uqu-tab-btn active" data-target="tab-student" data-i18n="tabStudent">🎓 رحلة الطالب الرقمية</button>
+          <button class="tab-btn uqu-tab-btn" data-target="tab-faculty" data-i18n="tabFaculty">👨‍🏫 رحلة عضو التدريس</button>
+          <button class="tab-btn uqu-tab-btn" data-target="tab-ai" data-i18n="tabAi">🤖 مبادرات الذكاء الاصطناعي (8)</button>
+          <button class="tab-btn uqu-tab-btn" data-target="tab-national" data-i18n="tabNational">🏆 المنجزات الوطنية الكبرى</button>
+        </div>
+
+        <!-- محتوى التبويب 1: رحلة الطالب -->
+        <div id="tab-student" class="uqu-tab-content">
+          <div class="interactive-journey-flow">
+            <div class="journey-step-card" data-showcase="services_pillar">
+              <div class="step-num-circle">1</div>
+              <div class="step-info">
+                <h5>القبول والتسجيل الذكي الفوري</h5>
+                <p>فرز آلي ومفاضلة ذكية بالربط مع نظام "نور" وهيئة "قياس" دون أي مراجعة حضورية.</p>
+              </div>
+            </div>
+            <div class="journey-step-card" data-showcase="services_pillar">
+              <div class="step-num-circle">2</div>
+              <div class="step-info">
+                <h5>الهوية الرقمية والبطاقة الجامعية</h5>
+                <p>إصدار فوري للبطاقة عبر محفظة الهاتف الذكي والعبور الميسر عبر البوابات الذكية والمرافق.</p>
+              </div>
+            </div>
+            <div class="journey-step-card" data-showcase="uqu_visits">
+              <div class="step-num-circle">3</div>
+              <div class="step-info">
+                <h5>البيئة الأكاديمية والتعلم المدمج (بلاك بورد)</h5>
+                <p>أكثر من 6 ملايين ساعة استخدام سنوية، ومعامل افتراضية تفاعلية، والمشرف الأكاديمي الذكي.</p>
+              </div>
+            </div>
+            <div class="journey-step-card" data-showcase="services_pillar">
+              <div class="step-num-circle">4</div>
+              <div class="step-info">
+                <h5>الخدمات الذاتية الشاملة (بوابتي وعيادتي)</h5>
+                <p>إنجاز أكثر من 850 ألف طلب إلكتروني ذاتي، وحجز العيادات الطبية، والمكتبة الرقمية الذكية.</p>
+              </div>
+            </div>
+            <div class="journey-step-card" data-showcase="uqu_dga">
+              <div class="step-num-circle">5</div>
+              <div class="step-info">
+                <h5>التخرج الرقمي والبرامج القصيرة (MicroX)</h5>
+                <p>إصدار وثائق التخرج المشفرة فورياً، وتأهيل لسوق العمل عبر 13 برنامجاً جامعياً قصيراً معتمداً.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- محتوى التبويب 2: رحلة عضو التدريس -->
+        <div id="tab-faculty" class="uqu-tab-content" style="display: none;">
+          <div class="interactive-journey-flow">
+            <div class="journey-step-card" data-showcase="services_pillar">
+              <div class="step-num-circle">1</div>
+              <div class="step-info">
+                <h5>المباشرة والملف الأكاديمي الموحد</h5>
+                <p>أتمتة شاملة لإجراءات الموارد البشرية وإدارة النصاب التدريسي بالجدولة الآلية الذكية.</p>
+              </div>
+            </div>
+            <div class="journey-step-card" data-showcase="ai_pillar">
+              <div class="step-num-circle">2</div>
+              <div class="step-info">
+                <h5>التدريس الذكي وأداة "مطور المحتوى"</h5>
+                <p>توليد وإثراء المواد التعليمية وبنوك الأسئلة المعيارية بتقنيات الذكاء الاصطناعي التوليدي.</p>
+              </div>
+            </div>
+            <div class="journey-step-card" data-showcase="uqu_visits">
+              <div class="step-num-circle">3</div>
+              <div class="step-info">
+                <h5>منظومة البحث والتمويل المؤسسي</h5>
+                <p>إدارة المنح البحثية إلكترونياً، والنشر في أوعية المجلات العالمية المصنفة والمكتبة الرقمية.</p>
+              </div>
+            </div>
+            <div class="journey-step-card" data-showcase="uqu_dga">
+              <div class="step-num-circle">4</div>
+              <div class="step-info">
+                <h5>العطاء المعرفي في المنصة الوطنية OERX</h5>
+                <p>تصدر جامعة أم القرى للمملكة بتقديم 2,091 مورداً تعليمياً مفتوحاً متفوقة على 135 جهة.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- محتوى التبويب 3: مبادرات الذكاء الاصطناعي الـ 8 -->
+        <div id="tab-ai" class="uqu-tab-content" style="display: none;">
+          <div class="ai-initiatives-grid">
+            <div class="ai-card" data-showcase="ai_pillar">
+              <div class="ai-icon-circle">🤖</div>
+              <div>
+                <h5 style="font-family: var(--font-display); font-size: 20px; color: var(--snd-gold); margin-bottom: 4px;">مطور المحتوى الذكي</h5>
+                <p style="font-size: 15px; color: var(--text-muted);">إثراء المقررات والمواد بالذكاء الاصطناعي التوليدي.</p>
+              </div>
+            </div>
+
+            <div class="ai-card" data-showcase="ai_pillar">
+              <div class="ai-icon-circle">📅</div>
+              <div>
+                <h5 style="font-family: var(--font-display); font-size: 20px; color: var(--snd-gold); margin-bottom: 4px;">الجدولة الآلية الذكية</h5>
+                <p style="font-size: 15px; color: var(--text-muted);">خوارزميات لتوزيع الشعب والقاعات ومنع التعارضات.</p>
+              </div>
+            </div>
+
+            <div class="ai-card" data-showcase="services_pillar">
+              <div class="ai-icon-circle">💬</div>
+              <div>
+                <h5 style="font-family: var(--font-display); font-size: 20px; color: var(--snd-gold); margin-bottom: 4px;">الدعم الفني الذكي</h5>
+                <p style="font-size: 15px; color: var(--text-muted);">مساعد آلي يقدم الحلول الفورية للاستفسارات 24/7.</p>
+              </div>
+            </div>
+
+            <div class="ai-card" data-showcase="ai_pillar">
+              <div class="ai-icon-circle">📊</div>
+              <div>
+                <h5 style="font-family: var(--font-display); font-size: 20px; color: var(--snd-gold); margin-bottom: 4px;">مساعد البيانات</h5>
+                <p style="font-size: 15px; color: var(--text-muted);">استخلاص الرؤى القيادية والتقارير الفورية من البيانات.</p>
+              </div>
+            </div>
+
+            <div class="ai-card" data-showcase="ai_pillar">
+              <div class="ai-icon-circle">📈</div>
+              <div>
+                <h5 style="font-family: var(--font-display); font-size: 20px; color: var(--snd-gold); margin-bottom: 4px;">التنبؤ الذكي بأداء الطلاب</h5>
+                <p style="font-size: 15px; color: var(--text-muted);">رصد مبكر لحالات التعثر الأكاديمي وتقديم الدعم.</p>
+              </div>
+            </div>
+
+            <div class="ai-card" data-showcase="ai_pillar">
+              <div class="ai-icon-circle">💻</div>
+              <div>
+                <h5 style="font-family: var(--font-display); font-size: 20px; color: var(--snd-gold); margin-bottom: 4px;">AI للمطورين</h5>
+                <p style="font-size: 15px; color: var(--text-muted);">أدوات ذكية تدعم مهندسي البرمجيات في بناء الأنظمة.</p>
+              </div>
+            </div>
+
+            <div class="ai-card" data-showcase="services_pillar">
+              <div class="ai-icon-circle">👤</div>
+              <div>
+                <h5 style="font-family: var(--font-display); font-size: 20px; color: var(--snd-gold); margin-bottom: 4px;">المساعد الشخصي للمنسوبين</h5>
+                <p style="font-size: 15px; color: var(--text-muted);">إدارة المهام والمواعيد والطلبات الإدارية لكل موظف.</p>
+              </div>
+            </div>
+
+            <div class="ai-card" data-showcase="ai_pillar">
+              <div class="ai-icon-circle">🎓</div>
+              <div>
+                <h5 style="font-family: var(--font-display); font-size: 20px; color: var(--snd-gold); margin-bottom: 4px;">المشرف الأكاديمي الذكي</h5>
+                <p style="font-size: 15px; color: var(--text-muted);">إرشاد آلي وتوجيه لاختيار المسارات والخطط الدراسية.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- محتوى التبويب 4: المنجزات الوطنية والمشاريع -->
+        <div id="tab-national" class="uqu-tab-content" style="display: none;">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;">
+            <div class="national-card" style="padding: 20px; text-align: center; border-color: var(--snd-gold); cursor: pointer;" data-showcase="uqu_dga">
+              <div style="font-size: 34px; margin-bottom: 6px;">🥈</div>
+              <h5 style="font-family: var(--font-display); font-size: 19px; color: var(--snd-gold);">المركز الثاني بالمملكة</h5>
+              <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">في البرامج الجامعية القصيرة (MicroX) بـ 13 برنامجاً معتمداً.</p>
+            </div>
+
+            <div class="national-card" style="padding: 20px; text-align: center; border-color: var(--trait-authenticity); cursor: pointer;" data-showcase="uqu_visits">
+              <div style="font-size: 34px; margin-bottom: 6px;">🥇</div>
+              <h5 style="font-family: var(--font-display); font-size: 19px; color: var(--trait-authenticity);">المرتبة الأولى في OERX</h5>
+              <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">بـ 2,091 مورداً تعليمياً مفتوحاً متفوقة على أكثر من 135 جهة.</p>
+            </div>
+
+            <div class="national-card" style="padding: 20px; text-align: center; border-color: #6565e0; cursor: pointer;" data-showcase="uqu_dga">
+              <div style="font-size: 34px; margin-bottom: 6px;">🚀</div>
+              <h5 style="font-family: var(--font-display); font-size: 19px; color: #a2a2ff;">المستوى المتقدم</h5>
+              <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">في المؤشر الوطني للتعليم الإلكتروني متقدمة بمرحلتين عن 2023.</p>
+            </div>
+          </div>
+
+          <div class="national-card" style="padding: 24px 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h4 style="font-family: var(--font-display); font-size: 21px; color: var(--snd-gold);">
+                📦 محفظة مشاريع وعقود التحول الرقمي المعتمدة (DGA)
+              </h4>
+              <span class="badge-trait" style="background: rgba(198, 162, 90, 0.2); color: var(--snd-gold); border: 1px solid var(--snd-gold);">
+                63 مشروعاً تقنياً
+              </span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+              <div style="background: rgba(0, 58, 39, 0.4); padding: 16px; border-radius: var(--radius-md); border: 1px solid rgba(198, 162, 90, 0.2);">
+                <strong style="color: #5aba1c; font-size: 18px;">✓ 42 مشروعاً مكتملاً:</strong>
+                <p style="font-size: 15px; color: var(--text-cream); margin-top: 8px; line-height: 1.55;">
+                  125 أعمال تشغيل • 9 بنية تحتية وأدوات • 8 منصات رئيسية • 6 أمن سيبراني • 2 خدمات سحابية.
+                </p>
+              </div>
+              <div style="background: rgba(0, 58, 39, 0.4); padding: 16px; border-radius: var(--radius-md); border: 1px solid rgba(198, 162, 90, 0.2);">
+                <strong style="color: #dfc27e; font-size: 18px;">⏳ 21 مشروعاً تحت التنفيذ:</strong>
+                <p style="font-size: 15px; color: var(--text-cream); margin-top: 8px; line-height: 1.55;">
+                  4 بنية تحتية • 4 منصات وأنظمة • 4 أمن سيبراني • 4 تشغيل • 4 صيانة ودعم • 2 خدمات سحابية.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           القسم 4: قطاع الصحة الرقمية - وزارة الصحة
+           ========================================== -->
+      <section id="section-health" class="kiosk-section bg-sadu-overlay">
+        <div class="section-header">
+          <div style="display: flex; justify-content: center; align-items: center; gap: 14px; margin-bottom: 8px;">
+            <span class="section-tag" data-i18n="sec4Tag">القسم الرابع | قطاع الصحة الرقمية</span>
+            <button class="source-tag-btn open-source-modal-btn" data-source-key="moh">
+              🔍 المصدر الرسمي المعتمد (MOH & Seha)
+            </button>
+          </div>
+          <h2 class="section-title gold-text" data-i18n="sec4Title">وزارة الصحة: رعاية ذكية بلا حدود</h2>
+          <p class="section-desc" data-i18n="sec4Desc">منظومة صحية رقمية موحدة تقود العالم في التطبيب الاتصالي والمستشفيات الافتراضية والملف الطبي الموحد.</p>
+        </div>
+
+        <!-- شبكة التطبيقات الصحية الوطنية الستة التفاعلية -->
+        <div class="health-apps-grid">
+          <div class="national-card health-app-card" data-showcase="sehhaty_app">
+            <div style="font-size: 44px; margin-bottom: 8px;">💚</div>
+            <h4 style="font-family: var(--font-display); font-size: 23px; color: #5aba1c;">تطبيق صحتي</h4>
+            <p style="font-size: 15px; color: var(--text-muted); margin-top: 6px;">الملف الصحي، حجز المواعيد، الفحوصات الدورية، وتتبع المؤشرات الحيوية.</p>
+            <span class="health-app-badge">+30 مليون مستفيد موثق</span>
+          </div>
+
+          <div class="national-card health-app-card" data-showcase="seha_virtual">
+            <div style="font-size: 44px; margin-bottom: 8px;">🏥</div>
+            <h4 style="font-family: var(--font-display); font-size: 23px; color: var(--snd-gold);">مستشفى صحة الافتراضي</h4>
+            <p style="font-size: 15px; color: var(--text-muted); margin-top: 6px;">الأكبر عالمياً، يربط 150+ مستشفى لتقديم استشارات دقيقة بالذكاء الاصطناعي.</p>
+            <span class="health-app-badge">المركز الأول عالمياً</span>
+          </div>
+
+          <div class="national-card health-app-card" data-showcase="sehhaty_app">
+            <div style="font-size: 44px; margin-bottom: 8px;">💊</div>
+            <h4 style="font-family: var(--font-display); font-size: 23px; color: #4da3ff;">منصة وصفتي</h4>
+            <p style="font-size: 15px; color: var(--text-muted); margin-top: 6px;">صرف الوصفات الطبية مجاناً وفورياً من أكثر من 5,000 صيدلية تجارية في المملكة.</p>
+            <span class="health-app-badge">+100 مليون وصفة</span>
+          </div>
+
+          <div class="national-card health-app-card" data-showcase="governance_pillar">
+            <div style="font-size: 44px; margin-bottom: 8px;">📂</div>
+            <h4 style="font-family: var(--font-display); font-size: 23px; color: #a2a2ff;">منصة نفيس (NPHIES)</h4>
+            <p style="font-size: 15px; color: var(--text-muted); margin-top: 6px;">المنصة الوطنية الموحدة لتبادل البيانات الصحية بين القطاعين الحكومي والخاص.</p>
+            <span class="health-app-badge">سجل وطني موحد</span>
+          </div>
+
+          <div class="national-card health-app-card" data-showcase="sehhaty_app">
+            <div style="font-size: 44px; margin-bottom: 8px;">📅</div>
+            <h4 style="font-family: var(--font-display); font-size: 23px; color: #ff6b9d;">تطبيق موعد</h4>
+            <p style="font-size: 15px; color: var(--text-muted); margin-top: 6px;">جدولة وحجز المواعيد في مراكز الرعاية الصحية الأولية بكل يسر وسهولة.</p>
+            <span class="health-app-badge">+80M موعد مجدول</span>
+          </div>
+
+          <div class="national-card health-app-card" data-showcase="services_pillar">
+            <div style="font-size: 44px; margin-bottom: 8px;">🚑</div>
+            <h4 style="font-family: var(--font-display); font-size: 23px; color: #dfc27e;">النقل الإسعافي الذكي</h4>
+            <p style="font-size: 15px; color: var(--text-muted); margin-top: 6px;">نظام تتبع جغرافي آلي لحالات الطوارئ مع التوجيه اللحظي للمستشفى الأقرب.</p>
+            <span class="health-app-badge">استجابة سريعة فائقة</span>
+          </div>
+        </div>
+
+        <!-- مسار رحلة المريض الرقمية -->
+        <div class="national-card" style="padding: 26px 30px;">
+          <h3 style="font-family: var(--font-display); font-size: 24px; color: var(--snd-gold); margin-bottom: 16px; text-align: center;" data-i18n="patientJourneyTitle">
+            🩺 مسار رحلة المريض الرقمية المتكاملة
+          </h3>
+          <div class="interactive-journey-flow">
+            <div class="journey-step-card" data-showcase="sehhaty_app">
+              <div class="step-num-circle" style="background: rgba(90, 186, 28, 0.3); border: 2px solid #5aba1c; color: #5aba1c;">1</div>
+              <div class="step-info">
+                <h5 style="color: #5aba1c;">حجز الموعد والاستشارة الفورية عن بعد</h5>
+                <p>عبر تطبيقي "صحتي" و"موعد" لتحديد العيادة أو طلب استشارة مرئية مباشرة مع طبيب الأسرة.</p>
+              </div>
+            </div>
+
+            <div class="journey-step-card" data-showcase="seha_virtual">
+              <div class="step-num-circle" style="background: rgba(198, 162, 90, 0.3); border: 2px solid var(--snd-gold); color: var(--snd-gold);">2</div>
+              <div class="step-info">
+                <h5 style="color: var(--snd-gold);">التطبيب الاتصالي عبر مستشفى صحة الافتراضي</h5>
+                <p>تشخيص متقدم للحالات المعقدة وربط الأطباء الاستشاريين في كافة المناطق بدون تكبد عناء السفر.</p>
+              </div>
+            </div>
+
+            <div class="journey-step-card" data-showcase="sehhaty_app">
+              <div class="step-num-circle" style="background: rgba(0, 80, 175, 0.3); border: 2px solid #0050af; color: #4da3ff;">3</div>
+              <div class="step-info">
+                <h5 style="color: #4da3ff;">صرف الوصفة الإلكترونية الفورية (وصفتي)</h5>
+                <p>إرسال رسالة برمز الصرف واستلام العلاج مجاناً وفورياً من أقرب صيدلية مجتمعية معتمدة.</p>
+              </div>
+            </div>
+
+            <div class="journey-step-card" data-showcase="governance_pillar">
+              <div class="step-num-circle" style="background: rgba(101, 101, 224, 0.3); border: 2px solid #6565e0; color: #a2a2ff;">4</div>
+              <div class="step-info">
+                <h5 style="color: #a2a2ff;">الملف الصحي الموحد وتاريخ العلاج (نفيس)</h5>
+                <p>حفظ التاريخ المرضي والأشعة والتحاليل سحابياً لضمان سلامة المريض ومنع تكرار الإجراءات.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           القسم 5: الاختبار الوطني التفاعلي
+           ========================================== -->
+      <section id="section-quiz" class="kiosk-section bg-sadu-overlay">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="sec5Tag">القسم الخامس | تحدي المعرفة</span>
+          <h2 class="section-title gold-text" data-i18n="sec5Title">الاختبار الوطني: تحدي التحول الرقمي</h2>
+          <p class="section-desc" data-i18n="sec5Desc">اختبر حصيلتك المعرفية في منجزات التحول الرقمي في المملكة وجامعة أم القرى لليوم الوطني 96.</p>
+        </div>
+
+        <div id="quiz-dynamic-box">
+          <!-- يتم تشغيل وتحديث الأسئلة والخيارات والنتائج بواسطة quiz-and-certificate.js -->
+        </div>
+      </section>
+
+      <!-- ==========================================
+           القسم 6: النتيجة والشهادة الرسمية المعتمدة
+           ========================================== -->
+      <section id="section-cert" class="kiosk-section bg-tuwaiq-overlay">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="sec6Tag">القسم السادس | التكريم والشهادة</span>
+          <h2 class="section-title gold-text" data-i18n="sec6Title">شهادة المشاركة الوطنية المعتمدة</h2>
+          <p class="section-desc" data-i18n="sec6Desc">سجّل بياناتك الكريمة لإصدار شهادة اجتياز تحدي التحول الرقمي وتوثيقها وتحميلها وإرسالها لبريدك.</p>
+        </div>
+
+        <!-- نموذج تسجيل بيانات المتسابق اللمسي -->
+        <div class="contestant-form-card">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" data-i18n="formName">الاسم الكامل:</label>
+              <input type="text" id="contestant-name" class="kiosk-touch-input" placeholder="اكتب اسمك الكريم هنا..." value="سفير التحول الرقمي" maxlength="40">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-i18n="formEmail">البريد الإلكتروني:</label>
+              <input type="email" id="contestant-email" class="kiosk-touch-input" placeholder="name@domain.com" value="guest@saudi.gov.sa" maxlength="50">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-i18n="formRole">الصفة / الدور:</label>
+              <select id="contestant-role" class="kiosk-touch-select">
+                <option value="طالب / طالبة">طالب / طالبة (Student)</option>
+                <option value="عضو هيئة تدريس">عضو هيئة تدريس (Faculty Member)</option>
+                <option value="موظف / موظفة">موظف / موظفة (University Staff)</option>
+                <option value="زائر كريم" selected>زائر كريم (Valued Visitor)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <button id="update-cert-btn" class="dock-nav-btn primary" style="padding: 0 44px; height: 64px; font-size: 22px;" data-i18n="generateCertBtn">
+              🎓 إصدار وتوثيق الشهادة
+            </button>
+          </div>
+        </div>
+
+        <!-- معاينة الشهادة المولدة على الكانفاس -->
+        <div class="certificate-preview-box">
+          <canvas id="certificate-canvas"></canvas>
+        </div>
+
+        <!-- أزرار الإجراءات للشهادة -->
+        <div style="display: flex; justify-content: center; gap: 18px; margin: 15px 0 25px; flex-wrap: wrap;">
+          <button id="download-cert-btn" class="dock-nav-btn primary" data-i18n="downloadCertBtn">
+            📥 تحميل الشهادة (PNG)
+          </button>
+          <button id="print-cert-btn" class="dock-nav-btn" data-i18n="printCertBtn">
+            🖨️ طباعة الشهادة
+          </button>
+          <button id="email-cert-btn" class="dock-nav-btn" style="border-color: #5aba1c; color: #5aba1c;" data-i18n="emailCertBtn">
+            📧 إرسال إلى البريد الإلكتروني
+          </button>
+          <button onclick="window.app.goToSection(0)" class="dock-nav-btn" data-i18n="dockRestart">
+            🔄 البداية
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- شريط التنقل السفلي اللمسي (Dock) -->
+    <footer class="kiosk-dock">
+      <button id="dock-prev-btn" class="dock-nav-btn" style="visibility: hidden;" data-i18n="dockPrev">
+        ➔ السابق
+      </button>
+
+      <!-- نقاط التنقل للأقسام السبعة -->
+      <div class="dock-dots">
+        <div class="dock-dot active" title="شاشة البداية والترحيب"></div>
+        <div class="dock-dot" title="منجزات المملكة والحوكمة"></div>
+        <div class="dock-dot" title="خريطة المملكة ومحاور الرؤية"></div>
+        <div class="dock-dot" title="جامعة أم القرى"></div>
+        <div class="dock-dot" title="وزارة الصحة"></div>
+        <div class="dock-dot" title="الاختبار الوطني"></div>
+        <div class="dock-dot" title="الشهادة الرسمية المعتمدة"></div>
+      </div>
+
+      <button id="dock-next-btn" class="dock-nav-btn primary" data-i18n="dockNext">
+        التالي ➔
+      </button>
+
+      <!-- مؤشر الخمول وإعادة الضبط التلقائي -->
+      <div class="inactivity-bar">
+        <div id="inactivity-fill" class="inactivity-fill"></div>
+      </div>
+    </footer>
+
+    <!-- نافذة المودال للتفاصيل التفاعلية والمصادر -->
+    <div id="kiosk-modal" class="kiosk-modal-overlay">
+      <div class="kiosk-modal-box">
+        <button id="modal-close-btn" class="modal-close-btn">✕</button>
+        <h3 id="modal-title" style="font-family: var(--font-display); font-size: 28px; color: var(--snd-gold); margin-bottom: 18px;"></h3>
+        <div id="modal-body" style="font-size: 19px; color: var(--text-cream); line-height: 1.7;"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript Modules & Logic -->
+  <script src="js/i18n.js"></script>
+  <script src="js/sources-data.js"></script>
+  <script src="js/uqu-data.js"></script>
+  <script src="js/sound-effects.js"></script>
+  <script src="js/governance-wheel.js"></script>
+  <script src="js/journeys.js"></script>
+  <script src="js/map-explorer.js"></script>
+  <script src="js/virtual-keyboard.js"></script>
+  <script src="js/modal-cinematic.js"></script>
+  <script src="js/quiz-and-certificate.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

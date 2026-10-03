@@ -1,0 +1,153 @@
+/* =====================================================================
+   هوية اليوم الوطني السعودي 96 | عزّنا بطبعنا (v2)
+   الملف المرجعي للمتغيرات اللونية والأنماط المعمارية والتراثية
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;600;700;800;900&display=swap');
+
+:root {
+  /* درجات الأخضر الوطني الأساسي - SND Guideline P16 */
+  --snd-green-deep: #003a27;
+  --snd-green-primary: #006e3d;
+  --snd-green-vibrant: #008a4a;
+  --snd-green-darkest: #041b12;
+
+  /* لوحة ألوان الطِباع الوطنية الستة - SND Guideline P25 */
+  --trait-authenticity: #5aba1c;   /* الأصالة - الأخضر المبهج */
+  --trait-determination: #0050af;  /* الهمة - الأزرق الراسخ */
+  --trait-courage: #6565e0;        /* الشجاعة - الأزرق البنفسجي */
+  --trait-generosity: #971a4d;     /* الكرم - التوتي الداكن */
+  --trait-giving: #607c4f;         /* الجود - الزيتي الأصيل */
+  --trait-vision: #7c5d21;         /* الرؤية والطموح - الذهبي الأرضي */
+
+  /* التدرجات الذهبية الفاخرة والكريمة */
+  --snd-gold: #c6a25a;
+  --snd-gold-light: #dfc27e;
+  --snd-gold-gradient: linear-gradient(135deg, #dfc27e 0%, #c6a25a 50%, #997838 100%);
+  --snd-cream: #f8f5ef;
+  --snd-cream-card: rgba(248, 245, 239, 0.08);
+
+  /* ألوان النصوص والواجهات */
+  --text-white: #ffffff;
+  --text-cream: #f4efe4;
+  --text-muted: rgba(244, 239, 228, 0.75);
+  --text-dark: #0a1b14;
+
+  /* خطوط الهوية الرسمية */
+  --font-display: 'Noto Kufi Arabic', 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+  --font-body: 'IBM Plex Sans Arabic', 'Noto Kufi Arabic', -apple-system, sans-serif;
+
+  /* الظلال والتأثيرات الزجاجية */
+  --glass-bg: rgba(0, 58, 39, 0.65);
+  --glass-border: rgba(198, 162, 90, 0.3);
+  --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --glow-green: 0 0 35px rgba(0, 138, 74, 0.4);
+  --glow-gold: 0 0 35px rgba(198, 162, 90, 0.35);
+
+  --radius-sm: 14px;
+  --radius-md: 22px;
+  --radius-lg: 32px;
+  --radius-full: 9999px;
+  
+  --transition-smooth: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--snd-green-darkest);
+  color: var(--text-cream);
+  overflow: hidden;
+}
+
+html[dir="rtl"] body {
+  direction: rtl;
+}
+
+html[dir="ltr"] body {
+  direction: ltr;
+}
+
+/* الأنماط والخلفيات الوطنية */
+.bg-sadu-overlay {
+  background-image: url('../assets/patterns/sadu-pattern.svg');
+  background-repeat: repeat;
+  background-size: 80px 80px;
+  opacity: 0.12;
+}
+
+.bg-tuwaiq-overlay {
+  background-image: url('../assets/patterns/tuwaiq-mountain.svg');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% auto;
+}
+
+/* بطاقات زجاجية فاخرة بنقش وطني */
+.national-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition-smooth);
+}
+
+.national-card:active, .national-card.active {
+  border-color: var(--snd-gold);
+  transform: translateY(-4px);
+  box-shadow: var(--glow-gold), var(--glass-shadow);
+}
+
+/* التدرجات الذهبية للنصوص */
+.gold-text {
+  background: var(--snd-gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* وسوم وشارات الهوية */
+.badge-trait {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 15px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+/* زر المصدر المعتمد الرسمي */
+.source-tag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(198, 162, 90, 0.15);
+  border: 1px solid var(--snd-gold);
+  color: var(--snd-gold);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.source-tag-btn:hover, .source-tag-btn:active {
+  background: var(--snd-gold);
+  color: var(--snd-green-darkest);
+  transform: scale(0.96);
+}

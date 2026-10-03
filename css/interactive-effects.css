@@ -1,0 +1,807 @@
+/* =====================================================================
+   التأثيرات التفاعلية وخريطة المملكة والنوافذ السينمائية (v2 ترقية كبرى)
+   Grand Typography & World-Class Exhibition Visuals
+   ===================================================================== */
+
+/* جدارية القادة الثلاثة الرسمية */
+.hero-leaders-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 30px;
+  height: 640px;
+  margin: 30px 0 24px;
+  position: relative;
+}
+
+.leader-portrait-card {
+  flex: 1;
+  max-width: 310px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  background: radial-gradient(circle at 50% 80%, rgba(198, 162, 90, 0.2) 0%, rgba(0, 58, 39, 0.45) 70%, transparent 100%);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid rgba(198, 162, 90, 0.35);
+  padding: 20px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.leader-portrait-card.featured {
+  height: 106%;
+  border-color: var(--snd-gold);
+  box-shadow: 0 15px 50px rgba(198, 162, 90, 0.4);
+  background: radial-gradient(circle at 50% 80%, rgba(198, 162, 90, 0.3) 0%, rgba(0, 58, 39, 0.65) 70%, transparent 100%);
+}
+
+.leader-img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.75));
+  transition: var(--transition-smooth);
+}
+
+.leader-portrait-card:hover .leader-img, .leader-portrait-card:active .leader-img {
+  transform: scale(1.05);
+}
+
+.leader-meta {
+  width: 100%;
+  text-align: center;
+  background: rgba(0, 30, 20, 0.92);
+  border: 1.5px solid rgba(198, 162, 90, 0.35);
+  border-radius: var(--radius-md);
+  padding: 16px 12px;
+  margin-top: 12px;
+  z-index: 2;
+  backdrop-filter: blur(12px);
+}
+
+.leader-title {
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 800;
+  color: var(--snd-gold);
+}
+
+.leader-role {
+  font-size: 16px;
+  color: var(--text-cream);
+  margin-top: 5px;
+}
+
+/* الركائز الثلاث للتحول الرقمي */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+.pillar-card {
+  padding: 30px 24px;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.pillar-card:hover, .pillar-card:active {
+  transform: translateY(-6px);
+  border-color: var(--snd-gold);
+  box-shadow: var(--glow-gold);
+}
+
+.pillar-icon-box {
+  width: 86px;
+  height: 86px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  margin-bottom: 18px;
+  background: rgba(198, 162, 90, 0.15);
+  border: 2px solid var(--snd-gold);
+  color: var(--snd-gold);
+}
+
+.pillar-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-white);
+  margin-bottom: 12px;
+}
+
+/* عجلة الحوكمة التفاعلية */
+.wheel-section-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-top: 8px;
+}
+
+.wheel-container {
+  width: 520px;
+  height: 520px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wheel-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.65));
+}
+
+.wheel-center-hub {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, #006e3d 0%, #003a27 100%);
+  border: 4px solid var(--snd-gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(198, 162, 90, 0.5);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.wheel-center-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 900;
+  color: var(--snd-gold);
+}
+
+.wheel-center-sub {
+  font-size: 13px;
+  color: var(--text-cream);
+  margin-top: 2px;
+}
+
+.wheel-details-panel {
+  width: 100%;
+  min-height: 180px;
+  margin-top: 22px;
+  padding: 26px 32px;
+  background: rgba(0, 40, 27, 0.92);
+  border: 2px solid var(--snd-gold);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition-smooth);
+}
+
+.wheel-panel-icon {
+  width: 78px;
+  height: 78px;
+  border-radius: var(--radius-full);
+  background: rgba(198, 162, 90, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  color: var(--snd-gold);
+  flex-shrink: 0;
+}
+
+/* خريطة المملكة التفاعلية الحقيقية */
+.map-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.map-filters-row {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.map-pillar-filter {
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(198, 162, 90, 0.4);
+  color: var(--text-cream);
+  font-size: 19px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.map-pillar-filter.active {
+  background: var(--snd-gold-gradient);
+  color: var(--snd-green-darkest);
+  border-color: var(--snd-gold);
+  box-shadow: 0 6px 25px rgba(198, 162, 90, 0.45);
+}
+
+.pulsing-halo {
+  animation: pulseHalo 2.5s infinite ease-out;
+  transform-origin: center;
+}
+
+@keyframes pulseHalo {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.4); opacity: 0.2; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.map-info-box {
+  width: 100%;
+  padding: 26px 30px;
+  border-radius: var(--radius-lg);
+  background: rgba(0, 35, 24, 0.94);
+  border: 2px solid var(--snd-gold);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(15px);
+  transition: var(--transition-smooth);
+}
+
+/* إحصائيات جامعة أم القرى المكبرة */
+.dga-chart-card {
+  padding: 28px 32px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 26px;
+  background: linear-gradient(135deg, rgba(0, 58, 39, 0.8) 0%, rgba(3, 20, 14, 0.9) 100%);
+  border: 2px solid var(--snd-gold);
+}
+
+.dga-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.dga-bars-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 210px;
+  padding: 0 50px 10px;
+  border-bottom: 2.5px solid rgba(198, 162, 90, 0.4);
+}
+
+.dga-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 140px;
+}
+
+.dga-bar-fill {
+  width: 76px;
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(180deg, var(--snd-gold) 0%, #006e3d 100%);
+  position: relative;
+  transition: height 1s ease;
+  box-shadow: 0 0 25px rgba(198, 162, 90, 0.35);
+}
+
+.dga-bar-item.highlight .dga-bar-fill {
+  background: linear-gradient(180deg, #dfc27e 0%, var(--trait-authenticity) 100%);
+  box-shadow: 0 0 35px rgba(90, 186, 28, 0.55);
+}
+
+.dga-bar-val {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--text-white);
+}
+
+.dga-bar-year {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--snd-gold);
+}
+
+.dga-bar-change {
+  font-size: 14px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+}
+
+.change-up { background: rgba(90, 186, 28, 0.3); color: #5aba1c; }
+.change-down { background: rgba(151, 26, 77, 0.3); color: #ff6b8b; }
+
+.uqu-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.metric-stat-card {
+  padding: 24px 16px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(198, 162, 90, 0.3);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.metric-stat-card:hover, .metric-stat-card:active {
+  transform: translateY(-5px);
+  border-color: var(--snd-gold);
+  background: rgba(0, 110, 61, 0.25);
+}
+
+.metric-number {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 900;
+  color: var(--snd-gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.metric-label {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-cream);
+}
+
+.metric-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* تبويبات جامعة أم القرى */
+.tabs-control-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.tab-btn {
+  flex: 1;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(198, 162, 90, 0.35);
+  color: var(--text-cream);
+  font-size: 19px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.tab-btn.active {
+  background: var(--snd-gold-gradient);
+  color: var(--snd-green-darkest);
+  border-color: var(--snd-gold);
+}
+
+.interactive-journey-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.journey-step-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 20px 26px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(198, 162, 90, 0.25);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.journey-step-card:hover, .journey-step-card:active {
+  background: rgba(0, 110, 61, 0.35);
+  border-color: var(--snd-gold);
+  transform: translateX(-6px);
+}
+
+.step-num-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--snd-gold-gradient);
+  color: var(--snd-green-darkest);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-info h5 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--snd-gold);
+  margin-bottom: 5px;
+}
+
+.step-info p {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* مبادرات الذكاء الاصطناعي الـ 8 */
+.ai-initiatives-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.ai-card {
+  padding: 20px 22px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(198, 162, 90, 0.25);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.ai-card:hover, .ai-card:active {
+  background: rgba(0, 110, 61, 0.3);
+  border-color: var(--trait-authenticity);
+  transform: translateY(-4px);
+}
+
+.ai-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  background: rgba(90, 186, 28, 0.25);
+  color: var(--trait-authenticity);
+  border: 1.5px solid var(--trait-authenticity);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+/* قطاع الصحة الرقمية */
+.health-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 26px;
+}
+
+.health-app-card {
+  padding: 26px 22px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(198, 162, 90, 0.3);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.health-app-card:hover, .health-app-card:active {
+  border-color: var(--trait-authenticity);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(90, 186, 28, 0.35);
+}
+
+.health-app-badge {
+  font-size: 14px;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(198, 162, 90, 0.25);
+  color: var(--snd-gold);
+  display: inline-block;
+  margin-top: 12px;
+  font-weight: 700;
+}
+
+/* محرك الاختبار التفاعلي */
+.quiz-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.quiz-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 26px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 45, 30, 0.8);
+  border: 1.5px solid rgba(198, 162, 90, 0.35);
+  margin-bottom: 24px;
+}
+
+.quiz-question-box {
+  padding: 38px 32px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  border: 2.5px solid var(--snd-gold);
+  text-align: center;
+  margin-bottom: 24px;
+  box-shadow: var(--glass-shadow);
+}
+
+.quiz-question-text {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--text-white);
+  line-height: 1.45;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quiz-option-btn {
+  padding: 22px 28px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.07);
+  border: 2px solid rgba(198, 162, 90, 0.35);
+  color: var(--text-cream);
+  font-size: 22px;
+  font-weight: 800;
+  text-align: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: var(--transition-smooth);
+}
+
+.quiz-option-btn:hover, .quiz-option-btn:active {
+  background: rgba(198, 162, 90, 0.25);
+  border-color: var(--snd-gold);
+}
+
+.quiz-option-btn.correct {
+  background: rgba(90, 186, 28, 0.45) !important;
+  border-color: #5aba1c !important;
+  color: #ffffff;
+}
+
+.quiz-option-btn.wrong {
+  background: rgba(151, 26, 77, 0.45) !important;
+  border-color: #971a4d !important;
+  color: #ffffff;
+}
+
+/* قسم الشهادة ونموذج التسجيل */
+.certificate-preview-box {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto 22px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), var(--glow-gold);
+  border: 2.5px solid var(--snd-gold);
+}
+
+#certificate-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.contestant-form-card {
+  padding: 28px 34px;
+  border-radius: var(--radius-lg);
+  background: rgba(0, 40, 27, 0.94);
+  border: 2px solid var(--snd-gold);
+  margin-bottom: 26px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: inherit;
+}
+
+.form-label {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--snd-gold);
+}
+
+.kiosk-touch-input, .kiosk-touch-select {
+  height: 64px;
+  padding: 0 20px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(198, 162, 90, 0.45);
+  color: #ffffff;
+  font-size: 20px;
+  font-family: var(--font-body);
+  outline: none;
+}
+
+.kiosk-touch-input:focus, .kiosk-touch-select:focus {
+  border-color: var(--snd-gold);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* لوحة المفاتيح اللمسية الافتراضية */
+.virtual-keyboard-drawer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(4, 27, 18, 0.98);
+  border-top: 3.5px solid var(--snd-gold);
+  box-shadow: 0 -15px 60px rgba(0, 0, 0, 0.9);
+  z-index: 600;
+  padding: 20px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(25px);
+}
+
+.virtual-keyboard-drawer.visible {
+  transform: translateY(0);
+}
+
+.vk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--snd-gold);
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.vk-close-btn {
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid var(--snd-gold);
+  color: var(--snd-gold);
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.vk-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.vk-key {
+  flex: 1;
+  height: 64px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1.5px solid rgba(198, 162, 90, 0.35);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 800;
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-smooth);
+}
+
+.vk-key:active {
+  background: var(--snd-gold);
+  color: var(--snd-green-darkest);
+  transform: scale(0.92);
+}
+
+.vk-key.special-key {
+  background: rgba(198, 162, 90, 0.3);
+  color: var(--snd-gold);
+  font-size: 18px;
+  flex: 1.4;
+}
+
+/* نافذة المودال للتفاصيل التفاعلية */
+.kiosk-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(18px);
+  z-index: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 44px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.kiosk-modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.kiosk-modal-box {
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #003a27 0%, #031810 100%);
+  border: 2.5px solid var(--snd-gold);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--glow-gold);
+  position: relative;
+  scrollbar-width: none;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid var(--snd-gold);
+  color: var(--snd-gold);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+html[dir="ltr"] .modal-close-btn {
+  right: auto;
+  left: 24px;
+}

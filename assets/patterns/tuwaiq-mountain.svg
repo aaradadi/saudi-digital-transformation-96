@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 320" fill="none">
+  <path d="M0 320L0 220L140 180L280 230L450 130L580 170L740 90L890 190L1000 150L1080 210V320H0Z" fill="url(#tuwaiqGrad1)" opacity="0.25"/>
+  <path d="M0 320L0 250L190 220L360 270L540 180L690 220L840 140L960 220L1080 180V320H0Z" fill="url(#tuwaiqGrad2)" opacity="0.4"/>
+  <defs>
+    <linearGradient id="tuwaiqGrad1" x1="540" y1="90" x2="540" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0050af" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#003a27" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="tuwaiqGrad2" x1="540" y1="140" x2="540" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5aba1c" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#001a12" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+</svg>
