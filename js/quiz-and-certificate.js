@@ -112,7 +112,7 @@ class QuizAndCertificateManager {
     }
   }
 
-  saveTraineeRecord(name, email, role, certId) {
+  saveTraineeRecord(name, email, phone, role, certId) {
     let registry = this.getTraineesRegistry();
     const existingIndex = registry.findIndex(t => t.email && email && t.email.toLowerCase() === email.toLowerCase());
     const now = new Date();
@@ -120,6 +120,7 @@ class QuizAndCertificateManager {
 
     if (existingIndex >= 0) {
       registry[existingIndex].name = name;
+      registry[existingIndex].phone = phone || registry[existingIndex].phone || '-';
       registry[existingIndex].role = role;
       registry[existingIndex].certId = certId;
       registry[existingIndex].date = formattedDate;
@@ -128,6 +129,7 @@ class QuizAndCertificateManager {
         id: registry.length + 1,
         name: name,
         email: email,
+        phone: phone || '-',
         role: role,
         certId: certId,
         date: formattedDate,
@@ -150,15 +152,16 @@ class QuizAndCertificateManager {
   exportTraineesCSV() {
     const registry = this.getTraineesRegistry();
     if (!registry || registry.length === 0) {
-      alert('لا توجد بيانات مسجلة في كشف المتدربين حتى الآن. يرجى إدخال اسم المتدرب والبريد الإلكتروني والضغط على "إصدار وتوثيق الشهادة".');
+      alert('لا توجد بيانات مسجلة في كشف الحضور حتى الآن. سجّل بيانات المستفيدين أولاً لتصدير الكشف.');
       return;
     }
 
-    const headers = ['م', 'الاسم الكامل', 'البريد الإلكتروني', 'الصفة / الفئة', 'رمز التوثيق المعتمد', 'تاريخ ووقت التوثيق', 'الجهة الموثقة', 'العام'];
+    const headers = ['م', 'الاسم الكامل', 'البريد الإلكتروني', 'رقم الجوال', 'الصفة / الفئة', 'رمز التوثيق المعتمد', 'تاريخ ووقت التسجيل', 'الجهة الموثقة', 'العام'];
     const rows = registry.map((t, idx) => [
       idx + 1,
       `"${(t.name || '').replace(/"/g, '""')}"`,
       `"${(t.email || '').replace(/"/g, '""')}"`,
+      `"${(t.phone || '-').replace(/"/g, '""')}"`,
       `"${(t.role || '').replace(/"/g, '""')}"`,
       `"${(t.certId || '').replace(/"/g, '""')}"`,
       `"${(t.date || '').replace(/"/g, '""')}"`,
@@ -171,7 +174,7 @@ class QuizAndCertificateManager {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `cecq_trainees_registry_2026_${new Date().toISOString().slice(0, 10)}.csv`;
+    link.download = `cecq_attendees_registry_2026_${new Date().toISOString().slice(0, 10)}.csv`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -181,10 +184,124 @@ class QuizAndCertificateManager {
     if (window.fireConfetti) window.fireConfetti(2);
   }
 
+  copyAllEmails() {
+    const registry = this.getTraineesRegistry();
+    if (!registry || registry.length === 0) {
+      alert('لا توجد إيميلات مسجلة بعد في كشف الحضور.');
+      return;
+    }
+
+    const emails = Array.from(new Set(registry.map(t => (t.email || '').trim()).filter(Boolean)));
+    if (emails.length === 0) {
+      alert('لم يتم العثور على عناوين بريد إلكتروني صالحة في السجل.');
+      return;
+    }
+
+    const emailsString = emails.join('; ');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(emailsString).then(() => {
+        if (window.SoundEffects) SoundEffects.play('correct');
+        alert(`تم نسخ ${emails.length} بريد إلكتروني بنجاح إلى الحافظة!\n\nيمكنك الآن لصقها مباشرة في خانة النسخة المخفية (Bcc) في بريدك الإلكتروني لإرسال الشهادات لهم دفعة واحدة بكل يسر.`);
+      }).catch(() => {
+        this.fallbackCopyText(emailsString, emails.length);
+      });
+    } else {
+      this.fallbackCopyText(emailsString, emails.length);
+    }
+  }
+
+  fallbackCopyText(text, count) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert(`تم نسخ ${count} بريد إلكتروني بنجاح إلى الحافظة!`);
+  }
+
+  viewRegistryModal() {
+    const registry = this.getTraineesRegistry();
+    const isEn = window.I18n ? window.I18n.currentLang === 'en' : false;
+    const title = isEn ? 'Registered Attendees for Certificates (2026)' : 'كشف بيانات الحضور والشهادات المسجلين (2026م)';
+
+    if (!registry || registry.length === 0) {
+      const emptyBody = `
+        <div style="text-align: center; padding: 30px 20px;">
+          <div style="font-size: 54px; margin-bottom: 12px;">📋</div>
+          <h4 style="color: var(--snd-gold); font-size: 22px; margin-bottom: 8px;">
+            ${isEn ? 'No attendees registered yet.' : 'لا توجد بيانات مسجلة في الكشف حتى الآن.'}
+          </h4>
+          <p style="color: var(--text-muted); font-size: 17px;">
+            ${isEn ? 'Attendees who enter their name and email will appear here automatically.' : 'أي مستفيد يقوم بتسجيل اسمه وبريده الإلكتروني سيظهر في هذا الكشف فوراً.'}
+          </p>
+        </div>
+      `;
+      if (window.app && window.app.openModal) {
+        window.app.openModal(title, emptyBody);
+      }
+      return;
+    }
+
+    const rowsHtml = registry.map((t, i) => `
+      <tr>
+        <td style="font-weight: 700;">${i + 1}</td>
+        <td><strong>${t.name || '-'}</strong></td>
+        <td><a href="mailto:${t.email}" style="color: #4da3ff; text-decoration: underline;">${t.email || '-'}</a></td>
+        <td>${t.phone || '-'}</td>
+        <td>${t.role || '-'}</td>
+        <td><span style="font-family: monospace; font-size: 13px; color: var(--snd-gold);">${t.certId || '-'}</span></td>
+        <td style="font-size: 14px; color: var(--text-muted);">${t.date || '-'}</td>
+      </tr>
+    `).join('');
+
+    const modalBody = `
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <span style="font-size: 18px; font-weight: 700; color: #82e038;">
+            إجمالي المسجلين: ${registry.length} مستفيد
+          </span>
+          <div style="display: flex; gap: 10px;">
+            <button onclick="if(window.app && window.app.quizAndCert) window.app.quizAndCert.copyAllEmails()" class="dock-nav-btn" style="height: 44px; padding: 0 18px; font-size: 15px; border-color: var(--snd-gold); color: var(--snd-gold);">
+              📧 نسخ كافة الإيميلات
+            </button>
+            <button onclick="if(window.app && window.app.quizAndCert) window.app.quizAndCert.exportTraineesCSV()" class="dock-nav-btn primary" style="height: 44px; padding: 0 18px; font-size: 15px;">
+              📊 تصدير Excel
+            </button>
+          </div>
+        </div>
+
+        <div class="registry-table-wrapper">
+          <table class="registry-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>${isEn ? 'Name' : 'الاسم'}</th>
+                <th>${isEn ? 'Email' : 'البريد الإلكتروني'}</th>
+                <th>${isEn ? 'Phone' : 'الجوال'}</th>
+                <th>${isEn ? 'Role' : 'الصفة'}</th>
+                <th>${isEn ? 'Code' : 'رمز التوثيق'}</th>
+                <th>${isEn ? 'Date' : 'التاريخ'}</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    if (window.app && window.app.openModal) {
+      window.app.openModal(title, modalBody);
+    }
+  }
+
   clearTraineesRegistry() {
-    if (confirm('هل أنت متأكد من رغبتك في تفريغ كشف المتدربين المسجل لعام 2026؟')) {
+    if (confirm('هل أنت متأكد من رغبتك في تفريغ كشف المسجلين لعام 2026م؟ لا يمكن التراجع عن هذه الخطوة.')) {
       localStorage.removeItem('cecq_trainees_registry_2026');
       this.updateRegistryCountUI();
+      alert('تم تفريغ كشف المسجلين بنجاح.');
     }
   }
 
@@ -203,38 +320,96 @@ class QuizAndCertificateManager {
   bindContestantForm() {
     const nameInput = document.getElementById('contestant-name');
     const emailInput = document.getElementById('contestant-email');
+    const phoneInput = document.getElementById('contestant-phone');
     const roleSelect = document.getElementById('contestant-role');
-    const updateBtn = document.getElementById('update-cert-btn');
+
+    const registerBtn = document.getElementById('register-attendee-btn');
+    const newAttendeeBtn = document.getElementById('new-attendee-btn');
+    const viewRegistryBtn = document.getElementById('view-registry-btn');
+    const copyEmailsBtn = document.getElementById('copy-emails-btn');
     const exportCsvBtn = document.getElementById('export-csv-btn');
     const clearRegistryBtn = document.getElementById('clear-registry-btn');
 
+    const successBox = document.getElementById('cert-success-box');
+    const successMsg = document.getElementById('cert-success-msg');
+    const successId = document.getElementById('cert-success-id');
+
     this.updateRegistryCountUI();
+    this.renderCertificate();
 
-    if (updateBtn) {
-      updateBtn.addEventListener('pointerdown', (e) => {
+    const doRegister = (e) => {
+      if (e) e.preventDefault();
+
+      const nameVal = nameInput ? nameInput.value.trim() : '';
+      const emailVal = emailInput ? emailInput.value.trim() : '';
+      const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+      const roleVal = roleSelect ? roleSelect.value : 'زائر كريم';
+
+      if (!nameVal) {
+        alert('يرجى كتابة الاسم الكامل المطلوب كتابته على الشهادة.');
+        if (nameInput) nameInput.focus();
+        return;
+      }
+
+      if (!emailVal || !emailVal.includes('@')) {
+        alert('يرجى إدخال عنوان بريد إلكتروني صحيح لتصلك الشهادة الرسمية عليه بعد الفعالية.');
+        if (emailInput) emailInput.focus();
+        return;
+      }
+
+      this.contestant.name = nameVal;
+      this.contestant.email = emailVal;
+      this.contestant.phone = phoneVal;
+      this.contestant.role = roleVal;
+      this.contestant.certId = this.generateUniqueCertId();
+
+      this.saveTraineeRecord(
+        this.contestant.name,
+        this.contestant.email,
+        this.contestant.phone,
+        this.contestant.role,
+        this.contestant.certId
+      );
+
+      this.renderCertificate();
+
+      if (successBox && successMsg && successId) {
+        successId.textContent = this.contestant.certId;
+        successMsg.innerHTML = `شكراً لك أ. <strong>${this.contestant.name}</strong>.<br>تم حفظ بياناتك بنجاح، وستصلك الشهادة الرسمية المعتمدة لعام 2026م مباشرة على: <strong style="color: var(--snd-gold);">${this.contestant.email}</strong> بعد ختام الفعالية والمعرض من قِبل إدارة الكلية.`;
+        successBox.style.display = 'block';
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      if (window.SoundEffects) SoundEffects.play('correct');
+      if (window.fireConfetti) window.fireConfetti(2);
+    };
+
+    if (registerBtn) {
+      registerBtn.addEventListener('pointerdown', doRegister);
+    }
+
+    if (newAttendeeBtn) {
+      newAttendeeBtn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
-        if (nameInput && nameInput.value.trim()) {
-          this.contestant.name = nameInput.value.trim();
-        }
-        if (emailInput && emailInput.value.trim()) {
-          this.contestant.email = emailInput.value.trim();
-        }
-        if (roleSelect) {
-          this.contestant.role = roleSelect.value;
-        }
+        if (nameInput) { nameInput.value = ''; nameInput.focus(); }
+        if (emailInput) emailInput.value = '';
+        if (phoneInput) phoneInput.value = '';
+        if (successBox) successBox.style.display = 'none';
+        if (window.SoundEffects) SoundEffects.play('click');
+      });
+    }
 
-        // توليد رمز توثيق غير مكرر أبداً وتخزينه في السجل
-        this.contestant.certId = this.generateUniqueCertId();
-        this.saveTraineeRecord(
-          this.contestant.name,
-          this.contestant.email,
-          this.contestant.role,
-          this.contestant.certId
-        );
+    if (viewRegistryBtn) {
+      viewRegistryBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.viewRegistryModal();
+      });
+    }
 
-        this.renderCertificate();
-        if (window.SoundEffects) SoundEffects.play('correct');
-        if (window.fireConfetti) window.fireConfetti(2);
+    if (copyEmailsBtn) {
+      copyEmailsBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.copyAllEmails();
       });
     }
 
@@ -252,11 +427,22 @@ class QuizAndCertificateManager {
       });
     }
 
-    // أزرار التحميل والطباعة والإرسال
+    // أزرار التحميل والطباعة
     const downloadBtn = document.getElementById('download-cert-btn');
     if (downloadBtn) {
       downloadBtn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
+        const nameVal = nameInput ? nameInput.value.trim() : '';
+        const emailVal = emailInput ? emailInput.value.trim() : '';
+        const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+        const roleVal = roleSelect ? roleSelect.value : 'زائر كريم';
+
+        if (nameVal) this.contestant.name = nameVal;
+        if (emailVal) this.contestant.email = emailVal;
+        if (phoneVal) this.contestant.phone = phoneVal;
+        if (roleVal) this.contestant.role = roleVal;
+
+        this.renderCertificate();
         this.downloadCertificate();
       });
     }
@@ -265,15 +451,8 @@ class QuizAndCertificateManager {
     if (printBtn) {
       printBtn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
+        this.renderCertificate();
         this.printCertificate();
-      });
-    }
-
-    const emailBtn = document.getElementById('email-cert-btn');
-    if (emailBtn) {
-      emailBtn.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        this.sendCertificateEmail();
       });
     }
   }

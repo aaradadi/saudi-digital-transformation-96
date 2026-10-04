@@ -27,6 +27,7 @@ class AppControllerV2 {
     setTimeout(() => this.setupViewportScale(), 100);
     setTimeout(() => this.setupViewportScale(), 400);
 
+    this.setupTheme();
     this.setupNavigation();
     this.setupInactivityTimer();
     this.setupActions();
@@ -180,7 +181,45 @@ class AppControllerV2 {
     }
   }
 
+  setupTheme() {
+    const savedTheme = localStorage.getItem('kiosk_theme') || 'dark';
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-theme');
+    } else {
+      document.body.classList.remove('light-theme');
+    }
+    this.updateThemeButton();
+  }
+
+  updateThemeButton() {
+    const themeBtn = document.getElementById('action-theme-btn');
+    if (themeBtn) {
+      const isLight = document.body.classList.contains('light-theme');
+      themeBtn.innerHTML = isLight ? '🌙' : '☀️';
+      themeBtn.title = isLight ? 'التبديل للمظهر الداكن (Dark Mode)' : 'التبديل للمظهر الفاتح (Light Mode)';
+    }
+  }
+
+  toggleTheme() {
+    const isLight = document.body.classList.toggle('light-theme');
+    localStorage.setItem('kiosk_theme', isLight ? 'light' : 'dark');
+    this.updateThemeButton();
+    if (window.SoundEffects) SoundEffects.play('click');
+    if (this.quizAndCert && this.quizAndCert.renderCertificate) {
+      this.quizAndCert.renderCertificate();
+    }
+  }
+
   setupActions() {
+    const themeBtn = document.getElementById('action-theme-btn');
+    if (themeBtn) {
+      themeBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.resetInactivity();
+        this.toggleTheme();
+      });
+    }
+
     const soundBtn = document.getElementById('action-sound-btn');
     if (soundBtn) {
       soundBtn.addEventListener('pointerdown', (e) => {

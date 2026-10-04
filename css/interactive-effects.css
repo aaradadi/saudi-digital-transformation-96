@@ -65,15 +65,15 @@
 
 .leader-title {
   font-family: var(--font-display);
-  font-size: 23px;
+  font-size: 26px;
   font-weight: 800;
   color: var(--snd-gold);
 }
 
 .leader-role {
-  font-size: 16px;
+  font-size: 19px;
   color: var(--text-cream);
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 /* الركائز الثلاث للتحول الرقمي */
@@ -118,7 +118,7 @@
 
 .pillar-title {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 29px;
   font-weight: 800;
   color: var(--text-white);
   margin-bottom: 12px;
@@ -227,7 +227,7 @@
   background: rgba(255, 255, 255, 0.08);
   border: 2px solid rgba(198, 162, 90, 0.4);
   color: var(--text-cream);
-  font-size: 19px;
+  font-size: 22px;
   font-weight: 800;
   cursor: pointer;
   transition: var(--transition-smooth);
@@ -311,19 +311,19 @@
 
 .dga-bar-val {
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 900;
   color: var(--text-white);
 }
 
 .dga-bar-year {
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 800;
   color: var(--snd-gold);
 }
 
 .dga-bar-change {
-  font-size: 14px;
+  font-size: 16px;
   padding: 4px 12px;
   border-radius: var(--radius-full);
   font-weight: 700;
@@ -357,7 +357,7 @@
 
 .metric-number {
   font-family: var(--font-display);
-  font-size: 52px;
+  font-size: 54px;
   font-weight: 900;
   color: var(--snd-gold);
   line-height: 1;
@@ -365,13 +365,13 @@
 }
 
 .metric-label {
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 800;
   color: var(--text-cream);
 }
 
 .metric-sub {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text-muted);
   margin-top: 4px;
 }
@@ -390,7 +390,7 @@
   background: rgba(255, 255, 255, 0.08);
   border: 1.5px solid rgba(198, 162, 90, 0.35);
   color: var(--text-cream);
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 800;
   cursor: pointer;
   transition: var(--transition-smooth);
@@ -433,7 +433,7 @@
   background: var(--snd-gold-gradient);
   color: var(--snd-green-darkest);
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 900;
   display: flex;
   align-items: center;
@@ -443,7 +443,7 @@
 
 .step-info h5 {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 24px;
   color: var(--snd-gold);
   margin-bottom: 5px;
 }
@@ -558,7 +558,7 @@
 
 .quiz-question-text {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 900;
   color: var(--text-white);
   line-height: 1.45;
@@ -576,7 +576,7 @@
   background: rgba(255, 255, 255, 0.07);
   border: 2px solid rgba(198, 162, 90, 0.35);
   color: var(--text-cream);
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 800;
   text-align: inherit;
   cursor: pointer;
@@ -621,7 +621,7 @@
 }
 
 .contestant-form-card {
-  padding: 24px 28px;
+  padding: 28px 32px;
   border-radius: var(--radius-lg);
   background: rgba(0, 40, 27, 0.94);
   border: 2px solid var(--snd-gold);
@@ -634,7 +634,7 @@
 .form-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
+  gap: 18px;
   margin-bottom: 20px;
   width: 100%;
   box-sizing: border-box;
@@ -651,19 +651,19 @@
 }
 
 .form-label {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--snd-gold);
 }
 
 .kiosk-touch-input, .kiosk-touch-select {
-  height: 58px;
-  padding: 0 16px;
+  height: 64px;
+  padding: 0 20px;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.12);
   border: 2px solid rgba(198, 162, 90, 0.45);
   color: #ffffff;
-  font-size: 18px;
+  font-size: 21px;
   font-family: var(--font-body);
   outline: none;
   width: 100%;
@@ -676,10 +676,22 @@
   background: rgba(255, 255, 255, 0.18);
 }
 
+/* بطاقة تأكيد التسجيل الناجح */
+.cert-success-box {
+  background: rgba(0, 58, 39, 0.92);
+  border: 2px solid #5aba1c;
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  margin: 18px 0 24px;
+  text-align: center;
+  box-shadow: 0 10px 35px rgba(90, 186, 28, 0.25);
+  animation: fadeIn 0.4s ease;
+}
+
 /* شريط وسجل المتدربين لتصدير الشيت للمشرفين */
 .trainees-registry-card {
   margin: 20px 0 25px;
-  padding: 18px 24px;
+  padding: 22px 28px;
   background: rgba(4, 27, 18, 0.92);
   border: 1.5px solid rgba(198, 162, 90, 0.4);
   border-radius: var(--radius-md);
@@ -695,20 +707,20 @@
 .registry-stats {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 17px;
+  gap: 14px;
+  font-size: 21px;
   color: var(--text-cream);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .registry-stats .reg-badge {
   background: rgba(90, 186, 28, 0.25);
   color: #82e038;
   border: 1px solid rgba(90, 186, 28, 0.5);
-  padding: 4px 14px;
+  padding: 6px 16px;
   border-radius: 20px;
   font-weight: 800;
-  font-size: 16px;
+  font-size: 19px;
 }
 
 .registry-actions {
@@ -716,6 +728,56 @@
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+/* جدول كشف المسجلين في المودال */
+.registry-table-wrapper {
+  max-height: 520px;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(198, 162, 90, 0.3);
+  margin-top: 16px;
+}
+
+.registry-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+  font-size: 17px;
+}
+
+html[dir="ltr"] .registry-table {
+  text-align: left;
+}
+
+.registry-table th {
+  background: rgba(0, 58, 39, 0.9);
+  color: var(--snd-gold);
+  padding: 14px 18px;
+  position: sticky;
+  top: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  border-bottom: 2px solid var(--snd-gold);
+}
+
+body.light-theme .registry-table th {
+  background: #003a27;
+  color: #ffffff;
+}
+
+.registry-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(198, 162, 90, 0.2);
+  color: var(--text-cream);
+}
+
+body.light-theme .registry-table td {
+  color: #143525;
+}
+
+.registry-table tr:hover {
+  background: rgba(198, 162, 90, 0.1);
 }
 
 /* لوحة المفاتيح اللمسية الافتراضية */
