@@ -646,35 +646,25 @@
            ========================================== -->
       <section id="section-cert" class="kiosk-section bg-tuwaiq-overlay">
         <div class="section-header">
-          <span class="section-tag" data-i18n="sec6Tag">القسم السادس | توثيق الحضور والشهادات 2026</span>
-          <h2 class="section-title gold-text" data-i18n="sec6Title">تسجيل بيانات الحضور وإصدار الشهادات الرسمية</h2>
-          <p class="section-desc" data-i18n="sec6Desc">سجّل بياناتك الكريمة لتوثيق حضورك وتكريمك، وسيتم إرسال الشهادة الرسمية المعتمدة لعام 2026م إلى بريدك الإلكتروني بعد ختام الفعالية مباشرة من قِبل إدارة المعرض.</p>
+          <span class="section-tag" data-i18n="sec6Tag">القسم السادس | الشهادة المعتمدة الفورية 2026</span>
+          <h2 class="section-title gold-text" data-i18n="sec6Title">شهادة المشاركة والتحول الرقمي المعتمدة 2026</h2>
+          <p class="section-desc" data-i18n="sec6Desc">احصل على شهادتك الرسمية المعتمدة لعام 2026م فوراً وبكل سهولة. اكتب اسمك الكريم لتظهر شهادتك المعتمدة مباشرة، وحمّلها أو اطبعها فوراً دون أي جمع للبيانات الشخصية (PDPL).</p>
         </div>
 
-        <!-- إشعار واضح للمستفيدين عن آلية إرسال الشهادة -->
-        <div style="background: rgba(90, 186, 28, 0.15); border: 1.5px solid #5aba1c; border-radius: var(--radius-md); padding: 16px 24px; margin-bottom: 24px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px;">
-          <span style="font-size: 26px;">💡</span>
-          <span style="font-size: 20px; font-weight: 700; color: #82e038;" data-i18n="certNotice">
-            تنبيه: يتم تسجيل وتوثيق بياناتك هنا فوراً، وستصلك النسخة الرسمية للشهادة عبر بريدك الإلكتروني بعد انتهاء الفعالية.
+        <!-- إشعار الالتزام بنظام حماية البيانات الشخصية PDPL -->
+        <div style="background: rgba(0, 58, 39, 0.7); border: 1.5px solid #5aba1c; border-radius: var(--radius-md); padding: 16px 24px; margin-bottom: 22px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 14px;">
+          <span style="font-size: 26px;">🔒</span>
+          <span style="font-size: 19px; font-weight: 700; color: #82e038;" data-i18n="certPdplNotice">
+            متوافق مع نظام حماية البيانات الشخصية (PDPL): يتم توليد الشهادة وتنزيلها محلياً وفورياً دون حفظ أو جمع أو تخزين أي بيانات شخصية للمستفيد.
           </span>
         </div>
 
-        <!-- نموذج تسجيل بيانات المستفيد / المتسابق -->
-        <div class="contestant-form-card">
-          <div class="form-row">
+        <!-- نموذج إصدار الشهادة الفورية -->
+        <div class="contestant-form-card" style="padding: 24px 30px;">
+          <div class="form-row" style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px;">
             <div class="form-group">
-              <label class="form-label" data-i18n="formName">الاسم الكامل (للطباعة على الشهادة): *</label>
+              <label class="form-label" data-i18n="formName">الاسم الكريم (للطباعة على الشهادة): *</label>
               <input type="text" id="contestant-name" class="kiosk-touch-input" placeholder="اكتب اسمك الكريم هنا..." value="سفير التحول الرقمي" maxlength="50" required>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" data-i18n="formEmail">البريد الإلكتروني (لاستلام الشهادة): *</label>
-              <input type="email" id="contestant-email" class="kiosk-touch-input" placeholder="name@domain.com" value="guest@saudi.gov.sa" maxlength="60" required>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" data-i18n="formPhone">رقم الجوال / الواتساب (اختياري للتواصل):</label>
-              <input type="tel" id="contestant-phone" class="kiosk-touch-input" placeholder="05XXXXXXXX" maxlength="20">
             </div>
 
             <div class="form-group">
@@ -689,34 +679,15 @@
             </div>
           </div>
 
-          <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-            <button id="register-attendee-btn" class="dock-nav-btn primary" style="padding: 0 46px; height: 68px; font-size: 23px;" data-i18n="registerBtn">
-              ✅ تسجيل بياناتي وتأكيد استلام الشهادة بالبريد
+          <div style="display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;">
+            <button id="download-cert-btn" class="dock-nav-btn primary" style="padding: 0 44px; height: 68px; font-size: 22px; border-radius: var(--radius-full);" data-i18n="downloadCertBtn">
+              📥 تحميل الشهادة فوراً (PNG)
             </button>
-            <button id="download-cert-btn" class="dock-nav-btn" style="padding: 0 32px; height: 68px; font-size: 20px; border-color: var(--snd-gold); color: var(--snd-gold);" data-i18n="downloadCertBtn">
-              📥 تحميل نسخة فورية (PNG)
+            <button id="print-cert-btn" class="dock-nav-btn" style="padding: 0 32px; height: 68px; font-size: 20px; border-radius: var(--radius-full); border-color: var(--snd-gold); color: var(--snd-gold);" data-i18n="printCertBtn">
+              🖨️ طباعة الشهادة
             </button>
-            <button id="print-cert-btn" class="dock-nav-btn" style="padding: 0 28px; height: 68px; font-size: 20px;" data-i18n="printCertBtn">
-              🖨️ طباعة
-            </button>
-          </div>
-        </div>
-
-        <!-- بطاقة التأكيد المنبثقة بعد التسجيل الناجح -->
-        <div id="cert-success-box" class="cert-success-box" style="display: none;">
-          <div style="font-size: 56px; margin-bottom: 10px;">🎉</div>
-          <h3 style="font-family: var(--font-display); font-size: 28px; color: #82e038; margin-bottom: 8px;">
-            تم تسجيل وتوثيق بياناتك بنجاح!
-          </h3>
-          <p id="cert-success-msg" style="font-size: 21px; color: var(--text-cream); margin-bottom: 14px; line-height: 1.6;">
-            شكراً لك. سيتم إرسال الشهادة الرسمية المعتمدة لعام 2026م إلى بريدك الإلكتروني بعد ختام الفعالية والمعرض.
-          </p>
-          <div style="display: inline-block; background: rgba(0, 30, 20, 0.8); border: 1.5px solid var(--snd-gold); border-radius: var(--radius-full); padding: 8px 24px; font-size: 19px; color: var(--snd-gold); margin-bottom: 18px;">
-            رمز التوثيق المعتمد: <strong id="cert-success-id">CECQ-2026-XXXX</strong>
-          </div>
-          <div>
-            <button id="new-attendee-btn" class="dock-nav-btn" style="padding: 0 32px; height: 56px; font-size: 18px; border-color: #5aba1c; color: #82e038;">
-              ➕ تسجيل مستفيد آخر
+            <button id="cert-open-qr-btn" class="dock-nav-btn" style="padding: 0 28px; height: 68px; font-size: 19px; border-radius: var(--radius-full); border-color: #5aba1c; color: #82e038;">
+              📲 استلام عبر باركود الجوال (QR)
             </button>
           </div>
         </div>
@@ -724,29 +695,6 @@
         <!-- معاينة الشهادة المولدة على الكانفاس -->
         <div class="certificate-preview-box">
           <canvas id="certificate-canvas"></canvas>
-        </div>
-
-        <!-- بطاقة إدارة سجل المتدربين والمنظمين (Organizer Dashboard) -->
-        <div class="trainees-registry-card">
-          <div class="registry-stats">
-            <span style="font-size: 26px;">📋</span>
-            <span>كشف بيانات الحضور للشهادات:</span>
-            <span class="reg-badge"><strong id="registered-trainees-count">0</strong> مسجل</span>
-          </div>
-          <div class="registry-actions">
-            <button id="view-registry-btn" class="dock-nav-btn" style="padding: 0 22px; height: 54px; font-size: 18px; border-color: #5aba1c; color: #82e038;">
-              📋 استعراض الكشف
-            </button>
-            <button id="copy-emails-btn" class="dock-nav-btn" style="padding: 0 22px; height: 54px; font-size: 18px; border-color: var(--snd-gold); color: var(--snd-gold);">
-              📧 نسخ جميع الإيميلات
-            </button>
-            <button id="export-csv-btn" class="dock-nav-btn primary" style="padding: 0 24px; height: 54px; font-size: 18px;">
-              📊 تصدير Excel / CSV
-            </button>
-            <button id="clear-registry-btn" class="dock-nav-btn" style="padding: 0 16px; height: 54px; font-size: 16px; opacity: 0.75;" title="تفريغ السجل">
-              🗑️
-            </button>
-          </div>
         </div>
       </section>
 

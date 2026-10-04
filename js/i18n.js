@@ -82,24 +82,19 @@ const I18N_TRANSLATIONS = {
     sec5Title: 'الاختبار الوطني: تحدي التحول الرقمي',
     sec5Desc: 'اختبر حصيلتك المعرفية في منجزات التحول الرقمي في المملكة وجامعة أم القرى لليوم الوطني 96.',
 
-    // Section 6: Certificate & Registration
-    sec6Tag: 'القسم السادس | توثيق الحضور والشهادات 2026',
-    sec6Title: 'تسجيل بيانات الحضور وإصدار الشهادات الرسمية',
-    sec6Desc: 'سجّل بياناتك الكريمة لتوثيق حضورك وتكريمك، وسيتم إرسال الشهادة الرسمية المعتمدة لعام 2026م إلى بريدك الإلكتروني بعد ختام الفعالية مباشرة من قِبل إدارة المعرض.',
-    certNotice: 'تنبيه: يتم تسجيل وتوثيق بياناتك هنا فوراً، وستصلك النسخة الرسمية للشهادة عبر بريدك الإلكتروني بعد انتهاء الفعالية.',
-    formName: 'الاسم الكامل (للطباعة على الشهادة): *',
-    formEmail: 'البريد الإلكتروني (لاستلام الشهادة): *',
-    formPhone: 'رقم الجوال / الواتساب (اختياري للتواصل):',
+    // Section 6: Certificate (PDPL Compliant Instant Generation)
+    sec6Tag: 'القسم السادس | إصدار الشهادة الفورية 2026',
+    sec6Title: 'إصدار وتوثيق شهادة التميز الرقمي فوراً',
+    sec6Desc: 'اكتب اسمك الكريم لتوليد شهادتك المعتمدة فوراً، وتحميلها أو طباعتها مباشرة بكل خصوصية وموثوقية.',
+    certPdplNotice: 'متوافق مع نظام حماية البيانات الشخصية (PDPL): يتم توليد الشهادة وتنزيلها محلياً وفورياً دون حفظ أو جمع أو تخزين أي بيانات شخصية للمستفيد.',
+    formName: 'الاسم الكريم (للطباعة على الشهادة): *',
     formRole: 'الصفة / الفئة:',
     roleStudent: 'طالب / طالبة',
     roleFaculty: 'عضو هيئة تدريس',
     roleEmployee: 'موظف / موظفة',
     roleVisitor: 'زائر كريم',
-    registerBtn: '✅ تسجيل بياناتي وتأكيد استلام الشهادة بالبريد',
-    generateCertBtn: '🎓 إصدار وتوثيق الشهادة',
-    downloadCertBtn: '📥 تحميل نسخة فورية (PNG)',
-    printCertBtn: '🖨️ طباعة',
-    emailCertBtn: '📧 إرسال إلى البريد الإلكتروني',
+    downloadCertBtn: '📥 تحميل الشهادة فوراً (PNG)',
+    printCertBtn: '🖨️ طباعة الشهادة',
     certSlogan: 'عزّنا بطبعنا | اليوم الوطني 96'
   },
 
@@ -181,25 +176,19 @@ const I18N_TRANSLATIONS = {
     sec5Title: 'National Quiz: Digital Transformation Challenge',
     sec5Desc: 'Test your knowledge on Saudi Arabia\'s digital achievements and UQU milestones for National Day 96.',
 
-    // Section 6: Certificate
-    // Section 6: Certificate & Registration
-    sec6Tag: 'Section 6 | Attendance & Certificates 2026',
-    sec6Title: 'Attendance Registration & Official Certification',
-    sec6Desc: 'Enter your credentials to record your attendance. Your official 2026 certified certificate will be emailed directly to your registered inbox after the event concludes.',
-    certNotice: 'Notice: Your details are recorded securely now. The official certified certificate will be dispatched to your email after the event.',
-    formName: 'Full Name (For Certificate): *',
-    formEmail: 'Email Address (To Receive Certificate): *',
-    formPhone: 'Mobile / WhatsApp (Optional for updates):',
+    // Section 6: Certificate (PDPL Compliant Instant Generation)
+    sec6Tag: 'Section 6 | Instant Certificate 2026',
+    sec6Title: 'Instant Issue & Certification',
+    sec6Desc: 'Enter your name to generate your certified certificate instantly, download or print it directly with full privacy.',
+    certPdplNotice: 'PDPL Compliant: Certificates are generated and downloaded locally and instantly without collecting or storing any personal data.',
+    formName: 'Name (For Certificate): *',
     formRole: 'Category / Role:',
     roleStudent: 'Student',
     roleFaculty: 'Faculty Member',
     roleEmployee: 'University Staff',
     roleVisitor: 'Valued Visitor',
-    registerBtn: '✅ Register My Details & Confirm Delivery',
-    generateCertBtn: '🎓 Issue & Certify Certificate',
-    downloadCertBtn: '📥 Instant Preview / Download (PNG)',
-    printCertBtn: '🖨️ Print',
-    emailCertBtn: '📧 Send to My Email',
+    downloadCertBtn: '📥 Instant Download (PNG)',
+    printCertBtn: '🖨️ Print Certificate',
     certSlogan: 'Our Pride in Who We Are | National Day 96'
   }
 };
